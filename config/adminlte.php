@@ -320,12 +320,16 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
+        ['header' => 'Roles'],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
+            'text' => 'roles',
+            'route' => 'roles.index',
             'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+        ],
+        [
+            'text' => 'permisos',
+            'route' => 'permisos.index',
+            'icon' => 'far fa-fw fa-file',
         ],
         ['header' => 'Usuarios'],
         [
