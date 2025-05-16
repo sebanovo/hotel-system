@@ -18,27 +18,23 @@
 
     <div class="card">
         <div class="card-body">
-            @role('Administrador')
-                <div>
-                    <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
-                        data-target="#modalPurple"/>
-                </div>
-            @endrole
+            <div>
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
+                    data-target="#modalPurple" />
+            </div>
             <x-adminlte-datatable id="table1" :heads="$heads" class="card-body">
                 @foreach ($usuarios as $usuario)
                     <tr>
                         <td>{{ $usuario->id }}</td>
                         <td>{{ $usuario->name }}</td>
                         <td>{{ $usuario->email }}</td>
-                        <td>{{ implode(', ', $usuario->getRoleNames()->toArray())}}</td>
+                        <td>{{ implode(', ', $usuario->getRoleNames()->toArray()) }}</td>
 
                         <td>
-                            @role('Administrador')
-                                <a href="{{ route('asignar.edit', $usuario) }}"><button
-                                        class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                                    </button></a>
-                            @endrole
+                            <a href="{{ route('asignar.edit', $usuario) }}"><button
+                                    class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                                    <i class="fa fa-lg fa-fw fa-pen"></i>
+                                </button></a>
                         </td>
                     </tr>
                 @endforeach

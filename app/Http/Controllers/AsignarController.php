@@ -50,6 +50,7 @@ class AsignarController extends Controller
         //
         $usuario = User::find($id);
         $roles = Role::all();
+
         return view('sistema.usuarios.usuario_rol', compact('usuario', 'roles'));
     }
 
@@ -61,7 +62,7 @@ class AsignarController extends Controller
         //
         $usuario = User::find($id);
         $usuario->roles()->sync($request->roles);
-        return redirect()->route('asignar.edit', $usuario);
+        return redirect()->route('asignar.index')->with('success', 'Roles asignados con éxito');
     }
 
     /**

@@ -3,7 +3,7 @@
 use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +29,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::resource('/usuarios', UsuarioController::class)->names('usuarios');
+    Route::resource('/usuarios', UserController::class)->names('usuarios');
     Route::resource('/roles', RoleController::class)->names('roles');
     Route::resource('/permisos', PermisoController::class)->names('permisos');
     Route::resource('/asignar', AsignarController::class)->names('asignar');

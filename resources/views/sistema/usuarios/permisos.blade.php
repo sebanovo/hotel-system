@@ -17,7 +17,7 @@
                    <i class="fa fa-lg fa-fw fa-eye"></i>
                </button>';
 
-      @endphp
+    @endphp
 
     <div class="card">
         <div class="card-body">
@@ -31,6 +31,22 @@
                         <td>{{ $permiso->id }}</td>
                         <td>{{ $permiso->name }}</td>
                         <td>
+                            <x-adminlte-button label="" theme="primary" icon="fa fa-lg fa-fw fa-pen"
+                                class="btn btn-xs btn-default text-primary mx-1 shadow" data-toggle="modal"
+                                data-target="#modalUpdatePermiso{{ $permiso->id }}" />
+                            <x-adminlte-modal id="modalUpdatePermiso{{ $permiso->id }}" title="Actualizar permiso" theme="primary"
+                                icon="fas fa-bolt" size='lg' disable-animations>
+                                <form action="{{ route('permisos.update', $permiso) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <x-adminlte-input name="nombre" label="Nombre" placeholder="nombre permiso"
+                                            fgroup-class="col-md-6" disable-feedback />
+                                    </div>
+                                    <x-adminlte-button type="submit" label="Actualizar" theme="primary"
+                                        icon="fas fa-save" />
+                                </form>
+                            </x-adminlte-modal>
                             <form style="display : inline" action="{{ route('permisos.destroy', $permiso) }}" method="POST"
                                 class='form-eliminar'>
                                 @csrf
@@ -53,6 +69,7 @@
                     <x-adminlte-button type="submit" label="Guardar" theme="primary" icon="fas fa-save" />
                 </form>
             </x-adminlte-modal>
+
         </div>
     </div>
 @stop

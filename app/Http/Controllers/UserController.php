@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,6 +42,7 @@ class UsuarioController extends Controller
         $usuario->email = $request->input('email');
         $usuario->password = bcrypt($request->input('password'));
         $usuario->save();
+        $usuario->assignRole('Cliente');
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado con éxito');
     }
 

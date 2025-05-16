@@ -8,6 +8,10 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Administrar roles y permisos')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -63,7 +67,7 @@ class RoleController extends Controller
         //
         $role = Role::find($id);
         $role->permissions()->sync($request->input('permisos'));
-        return redirect()->route('roles.edit', $role);
+        return redirect()->route('roles.index', $role);
     }
 
     /**
@@ -72,5 +76,8 @@ class RoleController extends Controller
     public function destroy(string $id)
     {
         //
+        $role = Role::find($id);
+        $role->delete();
+        return redirect('roles.index')->with('success', 'Rol eliminado con éxito');
     }
 }

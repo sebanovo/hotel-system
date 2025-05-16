@@ -57,6 +57,10 @@ class PermisoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $permiso = Permission::find($id);
+        $permiso->name = $request->input('nombre');
+        $permiso->save();
+        return redirect()->route('permisos.index')->with('success', 'Permiso actualizado con éxito');
     }
 
     /**

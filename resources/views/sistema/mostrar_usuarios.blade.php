@@ -22,10 +22,10 @@
     {{-- <x-adminlte-datatable id="table1" :heads="$heads" :config="$config"> --}}
     <div class="card">
         <div class="card-body">
-             <a href="{{ route('usuarios.create') }}">
+            <a href="{{ route('usuarios.create') }}">
                 <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
-             </a>
+            </a>
             <x-adminlte-datatable id="table1" :heads="$heads">
                 @foreach ($usuarios as $usuario)
                     <tr>
@@ -33,10 +33,11 @@
                         <td>{{ $usuario->name }}</td>
                         <td>{{ $usuario->email }}</td>
                         <td>
-                            <a href="{{ route('usuarios.edit', $usuario) }}"><button
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
+                            <a href="{{ route('usuarios.edit', $usuario) }}">
+                                <button class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button></a>
+                                </button>
+                            </a>
                             <form style="display : inline" action="{{ route('usuarios.destroy', $usuario) }}" method="POST"
                                 class='form-eliminar'>
                                 @csrf

@@ -320,22 +320,28 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        ['header' => 'Roles y permisos'],
+        [
+            'header' => 'Roles y permisos',
+            'can' => 'Administrar roles y permisos'
+        ],
 
         [
             'text' => 'asignar roles a usuarios',
             'route' => 'asignar.index',
             'icon' => 'fas fa-user-lock',
+            'can' => 'Administrar roles y permisos'
         ],
         [
             'text' => 'roles',
             'route' => 'roles.index',
             'icon' => 'fas fa-user-tie',
+            'can' => 'Administrar roles y permisos'
         ],
         [
             'text' => 'permisos',
             'route' => 'permisos.index',
             'icon' => 'fas fa-lock',
+            'can' => 'Administrar roles y permisos'
         ],
         ['header' => 'Usuarios'],
 
