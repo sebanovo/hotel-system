@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-class PermisoController extends Controller
+class AsignarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +14,8 @@ class PermisoController extends Controller
     public function index()
     {
         //
-        $permisos = Permission::all();
-        return view('sistema.usuarios.permisos', compact('permisos'));
+        $usuarios = User::all();
+        return view('sistema.usuarios.asignar_usuarios', compact('usuarios'));
     }
 
     /**
@@ -31,8 +32,6 @@ class PermisoController extends Controller
     public function store(Request $request)
     {
         //
-        $permiso = Permission::create(['name' => $request->input('nombre')]);
-        return back();
     }
 
     /**
@@ -49,6 +48,9 @@ class PermisoController extends Controller
     public function edit(string $id)
     {
         //
+        $usuario = User::find($id);
+        $roles = Role::all();
+        return view('sistema.usuarios.usuario_rol', compact('usuario', 'roles'));
     }
 
     /**
@@ -57,6 +59,9 @@ class PermisoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $usuario = User::find($id);
+        $usuario->roles()->sync($request->roles);
+        return redirect()->route('asignar.edit', $usuario);
     }
 
     /**
@@ -65,7 +70,5 @@ class PermisoController extends Controller
     public function destroy(string $id)
     {
         //
-        Permission::where('id', $id)->delete();
-        return back()->with('success', 'Permmiso eliminado con éxito');
     }
 }

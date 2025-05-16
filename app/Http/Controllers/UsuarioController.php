@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -13,7 +13,7 @@ class UsuarioController extends Controller
     public function index()
     {
         //
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         return view('sistema.mostrar_usuarios', compact('usuarios'));
     }
 
@@ -33,16 +33,16 @@ class UsuarioController extends Controller
     {
         //
         $request->validate([
-            'nombre' => 'required|string|max:100',
-            'correo' => 'required|string|email|max:100|unique:usuarios',
-            'contraseña' => 'required|string|min:8|max:256',
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:8|max:256',
         ]);
-        $usuario = new Usuario();
-        $usuario->nombre = $request->input('nombre');
-        $usuario->correo = $request->input('correo');
-        $usuario->contraseña = bcrypt($request->input('contraseña'));
+        $usuario = new User();
+        $usuario->name = $request->input('name');
+        $usuario->email = $request->input('email');
+        $usuario->password = bcrypt($request->input('password'));
         $usuario->save();
-        return back()->with('success', 'Usuario creado con éxito');
+        return redirect()->route('usuarios.index')->with('success', 'Usuario creado con éxito');
     }
 
     /**
@@ -59,7 +59,7 @@ class UsuarioController extends Controller
     public function edit(string $id)
     {
         //
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         return view('sistema.editar_usuario', compact('usuario'));
     }
 
@@ -69,10 +69,10 @@ class UsuarioController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
 
-        $usuario->nombre = $request->input('nombre');
-        $usuario->correo = $request->input('correo');
+        $usuario->name = $request->input('name');
+        $usuario->email = $request->input('email');
         $usuario->save();
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado con éxito');
     }
@@ -83,7 +83,7 @@ class UsuarioController extends Controller
     public function destroy(string $id)
     {
         //
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         $usuario->delete();
         return back()->with('success', 'Usuario eliminado con éxito');
     }

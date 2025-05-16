@@ -320,81 +320,29 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        ['header' => 'Roles'],
+        ['header' => 'Roles y permisos'],
+
+        [
+            'text' => 'asignar roles a usuarios',
+            'route' => 'asignar.index',
+            'icon' => 'fas fa-user-lock',
+        ],
         [
             'text' => 'roles',
             'route' => 'roles.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-user-tie',
         ],
         [
             'text' => 'permisos',
             'route' => 'permisos.index',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-lock',
         ],
         ['header' => 'Usuarios'],
+
         [
             'text' => 'Mostrar usuarios',
             'route' => 'usuarios.index',
             'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Crear usuario',
-            'route' => 'usuarios.create',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
         ],
     ],
 

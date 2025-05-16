@@ -3,28 +3,28 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Roles - Permisos</h1>
+    <h1>Usuarios - Roles</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{ $role->name }}
+            {{ $usuario->name }}
         </div>
         <div class="card-body">
-            <h5>Lista de permisos</h5>
-            {!! Form::model($role, ['route' => ['roles.update', $role], 'method' => 'put']) !!}
-            @foreach ($permisos as $permiso)
+            <h5>Lista de usuarios</h5>
+            {!! Form::model($usuario, ['route' => ['asignar.update', $usuario], 'method' => 'put']) !!}
+            @foreach ($roles as $role)
                 <div>
                     <label>
-                        {!! Form::checkbox('permisos[]', $permiso->id, $role->hasPermissionTo($permiso->id) ?: false, [
+                        {!! Form::checkbox('roles[]', $role->id, $usuario->hasAnyRole($role->id) ?: false, [
                             'class' => 'mr-1',
                         ]) !!}
-                        {{ $permiso->name }}
+                        {{ $role->name }}
                     </label>
                 </div>
             @endforeach
-            {!! Form::submit('Asignar permisos', ['class' => 'btn btn-primary mt-3']) !!}
+            {!! Form::submit('Asignar roles', ['class' => 'btn btn-primary mt-3']) !!}
             {!! Form::close() !!}
         </div>
     </div>

@@ -16,13 +16,12 @@
         $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
                    <i class="fa fa-lg fa-fw fa-eye"></i>
                </button>';
-
     @endphp
 
     <div class="card">
         <div class="card-body">
             <div>
-                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right" data-toggle="modal"
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
             </div>
             <x-adminlte-datatable id="table1" :heads="$heads" class="card-body">

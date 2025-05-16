@@ -22,7 +22,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right" data-toggle="modal"
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
             </div>
             <x-adminlte-datatable id="table1" :heads="$heads" class="card-body">
@@ -31,10 +31,6 @@
                         <td>{{ $permiso->id }}</td>
                         <td>{{ $permiso->name }}</td>
                         <td>
-                            <a href="{{ route('permisos.edit', $permiso) }}"><button
-                                    class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
-                                    <i class="fa fa-lg fa-fw fa-pen"></i>
-                                </button></a>
                             <form style="display : inline" action="{{ route('permisos.destroy', $permiso) }}" method="POST"
                                 class='form-eliminar'>
                                 @csrf

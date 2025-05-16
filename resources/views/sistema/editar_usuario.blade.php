@@ -13,8 +13,8 @@
                 @csrf
                 @method('PUT')
                 {{-- With prepend slot --}}
-                <x-adminlte-input type="text" name="nombre" label="Nombre" placeholder="nombre usuario"
-                    label-class="text-lightblue" value="{{ $usuario->nombre }}">
+                <x-adminlte-input type="text" name="name" label="Nombre" placeholder="nombre usuario"
+                    label-class="text-lightblue" value="{{ $usuario->name }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-user text-lightblue"></i>
@@ -22,8 +22,8 @@
                     </x-slot>
                 </x-adminlte-input>
 
-                <x-adminlte-input type="text" name="correo" label="Correo" placeholder="correo@gmail.com"
-                    label-class="text-lightblue" value="{{ $usuario->correo }}">
+                <x-adminlte-input type="text" name="email" label="Correo" placeholder="correo@gmail.com"
+                    label-class="text-lightblue" value="{{ $usuario->email }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">
                             <i class="fas fa-solid fa-envelope text-lightblue"></i>
