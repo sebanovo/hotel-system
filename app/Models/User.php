@@ -60,4 +60,24 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    
+        public function cliente_nota_ventas()
+    {
+        return $this->hasMany(NotaVenta::class, 'user_cliente_id');
+    }
+
+    public function empleado_nota_ventas()
+    {
+        return $this->hasMany(NotaVenta::class, 'user_empleado_id');
+    }
+
+    public function empleado_servicios()
+    {
+        return $this->hasMany(EmpleadoServicio::class, 'user_id');
+    }
+
+    public function reservas()
+    {
+        return $this->hasMany(Reserva::class, 'user_cliente_id');
+    }
 }
