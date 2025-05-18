@@ -343,12 +343,16 @@ return [
             'icon' => 'fas fa-lock',
             'can' => 'Administrar roles y permisos'
         ],
-        ['header' => 'Usuarios'],
+        [
+            'header' => 'Usuarios',
+            'can' => ['Crear usuarios', 'Leer usuarios', 'Actualizar usuarios', 'Eliminar usuarios']
+        ],
 
         [
             'text' => 'Mostrar usuarios',
             'route' => 'usuarios.index',
             'icon' => 'fas fa-fw fa-user',
+            'can' => ['Crear usuarios', 'Leer usuarios', 'Actualizar usuarios', 'Eliminar usuarios']
         ],
     ],
 
