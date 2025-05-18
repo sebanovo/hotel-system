@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Gestionar usuarios')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
