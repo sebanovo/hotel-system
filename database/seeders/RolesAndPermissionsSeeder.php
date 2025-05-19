@@ -36,6 +36,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'Actualizar roles',
             'Eliminar roles',
 
+            'Gestionar bitacoras', // Gestionar bitacoras
+
             'Crear permisos',
             'Leer permisos',
             'Actualizar permisos',
