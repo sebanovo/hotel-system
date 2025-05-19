@@ -66,7 +66,6 @@ Desarrollar un sistema integral que permita centralizar y optimizar los procesos
 - MySQL o MariaDB
 - Node.js & NPM
 - Git (opcional)
-- Extensiones PHP: `pdo`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `bcmath`
 
 # 🤝 Contribuir al Proyecto: Sistema de Información 1-1-2025
 
@@ -74,24 +73,23 @@ Desarrollar un sistema integral que permita centralizar y optimizar los procesos
 
 Este proyecto busca centralizar procesos clave como la gestión de clientes, reservas, servicios, facturación y más, para mejorar la eficiencia operativa de los hoteles.
 
----
-
 ## 🚀 Cómo empezar
 
 ### 1. Haz un Fork del repositorio
 
-Dirígete a [https://github.com/NoelSandoval-15/sistema-de-informacion1-1-2025](https://github.com/NoelSandoval-15/sistema-de-informacion1-1-2025) y haz clic en el botón `Fork` (arriba a la derecha). Esto creará una copia del repositorio en tu cuenta de GitHub.
+Haz clic en el botón `Fork` (arriba a la derecha). Esto creará una copia del repositorio en tu cuenta de GitHub.
 
 ### 2. Clona tu fork en tu máquina local
 
 ```bash
-git clone https://github.com/TU_USUARIO/sistema-de-informacion1-1-2025.git
-cd sistema-de-informacion1-1-2025
+git clone https://github.com/TU_USUARIO/sistema-hotelero.git
+
+cd sistema-hotelero
 ```
 
 3. Crea una nueva rama para tus cambios
 ```bash
-git checkout -b nombre-de-tu-rama
+git checkout -b <nueva_rama>
 ```
 
 ## Pasos para levantar el proyecto
@@ -107,13 +105,12 @@ php artisan key:generate
 
 php artisan migrate --seed
 
-npm run dev
+npm run istall
+
+npm run build
 
 php artisan serve
-
 ```
-Luego abre tu navegador en http://localhost:8000
-
 
 ## 📤 Subir cambios y enviar PR
 Guarda tus cambios:
@@ -123,6 +120,7 @@ git add .
 
 git commit -m "Un mensaje descriptivo"
 
-git push origin nombre-de-tu-rama
+git push origin <nombre_rama_remota> 
 ```
+
 Ve a tu fork en GitHub y haz clic en "Compare & pull request" para enviar tu solicitud de cambios al repositorio original.
