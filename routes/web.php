@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AsignarController;
+use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -33,4 +34,5 @@ Route::middleware([
     Route::resource('/roles', RoleController::class)->names('roles');
     Route::resource('/permisos', PermisoController::class)->names('permisos');
     Route::resource('/asignar', AsignarController::class)->names('asignar');
+    Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
 });
