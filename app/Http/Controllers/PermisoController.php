@@ -14,7 +14,7 @@ class PermisoController extends Controller
     {
         //
         $permisos = Permission::all();
-        return view('sistema.usuarios.permisos', compact('permisos'));
+        return view('sistema.roles_y_permisos.permisos', compact('permisos'));
     }
 
     /**

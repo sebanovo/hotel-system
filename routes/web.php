@@ -30,9 +30,12 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::resource('/usuarios', UserController::class)->names('usuarios');
+
     Route::resource('/roles', RoleController::class)->names('roles');
     Route::resource('/permisos', PermisoController::class)->names('permisos');
     Route::resource('/asignar', AsignarController::class)->names('asignar');
+
+    Route::resource('/usuarios', UserController::class)->names('usuarios');
+
     Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
 });

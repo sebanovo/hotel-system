@@ -15,7 +15,7 @@ class AsignarController extends Controller
     {
         //
         $usuarios = User::all();
-        return view('sistema.usuarios.asignar_usuarios', compact('usuarios'));
+        return view('sistema.roles_y_permisos.asignar_usuarios', compact('usuarios'));
     }
 
     /**

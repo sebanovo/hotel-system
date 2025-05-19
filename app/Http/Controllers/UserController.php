@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         //
         $usuarios = User::all();
-        return view('sistema.mostrar_usuarios', compact('usuarios'));
+        return view('sistema.usuarios.mostrar_usuarios', compact('usuarios'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('sistema.crear_usuarios');
+        return view('sistema.usuarios.crear_usuarios');
     }
 
     /**
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         //
         $usuario = User::find($id);
-        return view('sistema.editar_usuario', compact('usuario'));
+        return view('sistema.usuarios.editar_usuario', compact('usuario'));
     }
 
     /**

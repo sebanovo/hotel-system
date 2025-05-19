@@ -19,7 +19,7 @@ class RoleController extends Controller
     {
         //
         $roles = Role::all();
-        return view('sistema.usuarios.roles', compact('roles'));
+        return view('sistema.roles_y_permisos.roles', compact('roles'));
     }
 
     /**
@@ -56,7 +56,7 @@ class RoleController extends Controller
         //
         $role = Role::find($id);
         $permisos = Permission::all();
-        return view('sistema.usuarios.roles_permisos', compact('role', 'permisos'));
+        return view('sistema.roles_y_permisos.roles_permisos', compact('role', 'permisos'));
     }
 
     /**
