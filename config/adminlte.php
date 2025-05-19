@@ -345,14 +345,26 @@ return [
         ],
         [
             'header' => 'Usuarios',
-            'can' => ['Crear usuarios', 'Leer usuarios', 'Actualizar usuarios', 'Eliminar usuarios']
+            'can' => 'Gestionar usuarios'
         ],
 
         [
             'text' => 'Mostrar usuarios',
             'route' => 'usuarios.index',
             'icon' => 'fas fa-fw fa-user',
-            'can' => ['Crear usuarios', 'Leer usuarios', 'Actualizar usuarios', 'Eliminar usuarios']
+            'can' => 'Gestionar usuarios'
+        ],
+
+        [
+            'header' => 'Bitacora',
+            'can' => 'Gestionar bitacoras'
+        ],
+
+        [
+            'text' => 'Mostrar bitacora',
+            'route' => 'bitacora.index',
+            'icon' => 'fas fa-fw fa-history',
+            'can' => 'Gestionar bitacoras'
         ],
     ],
 
