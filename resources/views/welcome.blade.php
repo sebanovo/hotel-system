@@ -14,7 +14,7 @@
         }
 
         body {
-            background-image: url('/storage/imagen.png');
+            background-image: url('/images/imagen.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -23,7 +23,6 @@
         }
 
         .bg-cover {
-            background-image: url('https://images.unsplash.com/photo-1501117716987-c8e1ecb210c9?auto=format&fit=crop&w=1500&q=80');
             background-size: cover;
             background-position: center;
             height: 100vh;
