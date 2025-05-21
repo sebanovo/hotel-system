@@ -8,14 +8,7 @@
 
 @section('content')
     @php
-        $heads = [
-            'ID',
-            'Usuario',
-            'Correo',
-            'IP',
-            'Acción',
-            'Fecha y Hora'
-        ];
+        $heads = ['ID', 'Usuario', 'Correo', 'IP', 'Acción', 'Fecha y Hora'];
     @endphp
 
     <div class="card">
@@ -33,7 +26,7 @@
                 @endforeach
             </x-adminlte-datatable>
         </div>
-    </div> 
+    </div>
 @stop
 
 @section('css')

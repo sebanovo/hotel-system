@@ -34,8 +34,8 @@
                             <x-adminlte-button label="" theme="primary" icon="fa fa-lg fa-fw fa-pen"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow" data-toggle="modal"
                                 data-target="#modalUpdatePermiso{{ $permiso->id }}" />
-                            <x-adminlte-modal id="modalUpdatePermiso{{ $permiso->id }}" title="Actualizar permiso" theme="primary"
-                                icon="fas fa-bolt" size='lg' disable-animations>
+                            <x-adminlte-modal id="modalUpdatePermiso{{ $permiso->id }}" title="Actualizar permiso"
+                                theme="primary" icon="fas fa-bolt" size='lg' disable-animations>
                                 <form action="{{ route('permisos.update', $permiso) }}" method="POST">
                                     @csrf
                                     @method('PUT')
