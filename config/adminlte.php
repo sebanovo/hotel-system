@@ -365,6 +365,17 @@ return [
             'icon' => 'fas fa-fw fa-door-closed',
             'can' => 'Gestionar habitaciones'
         ],
+        [
+            'header' => 'Servicios',
+            'can' => 'Gestionar servicios'
+        ],
+
+        [
+            'text' => 'Mostrar servicios',
+            'route' => 'servicios.index',
+            'icon' => 'fas fa-fw fa-concierge-bell',
+            'can' => 'Gestionar servicios'
+        ],
 
         [
             'header' => 'Bitacora',

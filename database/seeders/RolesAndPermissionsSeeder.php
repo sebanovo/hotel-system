@@ -48,6 +48,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'Leer reservas',
             'Actualizar reservas',
             'Eliminar reservas',
+
+            'Gestionar servicios', // Gestionar servicios 
+            'Crear servicios',
+            'Leer servicios',
+            'Actualizar servicios',
+            'Eliminar servicios',
         ];
 
         foreach ($permissions as $permission) {
@@ -56,7 +62,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $roles = [
             'Administrador' => [
-                ... $permissions
+                ...$permissions
             ],
             'Recepcionista' => [
                 'Gestionar habitaciones', // Gestionar habitaciones
@@ -64,6 +70,12 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Leer habitaciones',
                 'Actualizar habitaciones',
                 'Eliminar habitaciones',
+
+                'Gestionar servicios', // Gestionar servicios 
+                'Crear servicios',
+                'Leer servicios',
+                'Actualizar servicios',
+                'Eliminar servicios',
             ],
             'Cliente' => []
         ];

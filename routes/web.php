@@ -5,6 +5,7 @@ use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,6 @@ Route::middleware([
     Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
 
     Route::resource('/habitaciones', HabitacionController::class)->names('habitaciones');
+
+    Route::resource('/servicios', ServicioController::class)->names('servicios');
 });
