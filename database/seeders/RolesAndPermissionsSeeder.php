@@ -58,7 +58,13 @@ class RolesAndPermissionsSeeder extends Seeder
             'Administrador' => [
                 ... $permissions
             ],
-            'Recepcionista' => [],
+            'Recepcionista' => [
+                'Gestionar habitaciones', // Gestionar habitaciones
+                'Crear habitaciones',
+                'Leer habitaciones',
+                'Actualizar habitaciones',
+                'Eliminar habitaciones',
+            ],
             'Cliente' => []
         ];
 
