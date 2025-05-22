@@ -354,6 +354,17 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'can' => 'Gestionar usuarios'
         ],
+        [
+            'header' => 'Habitaciones',
+            'can' => 'Gestionar habitaciones'
+        ],
+
+        [
+            'text' => 'Mostrar habitaciones',
+            'route' => 'habitaciones.index',
+            'icon' => 'fas fa-fw fa-door-closed',
+            'can' => 'Gestionar habitaciones'
+        ],
 
         [
             'header' => 'Bitacora',

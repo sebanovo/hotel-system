@@ -17,25 +17,28 @@ class DetalleHabitacionSeeder extends Seeder
             'id' => 1,
             'habitacion_id' => 1,
             'articulo_id' => 1,
-            
+
         ]);
+
         DetalleHabitacion::create([
             'id' => 2,
             'habitacion_id' => 2,
             'articulo_id' => 2,
-            
+
         ]);
+
         DetalleHabitacion::create([
             'id' => 3,
             'habitacion_id' => 3,
             'articulo_id' => 3,
-           
+
         ]);
+
         DetalleHabitacion::create([
             'id' => 4,
             'habitacion_id' => 1,
             'articulo_id' => 4,
-           
+
         ]);
     }
 }

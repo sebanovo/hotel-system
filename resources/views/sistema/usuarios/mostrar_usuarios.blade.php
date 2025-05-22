@@ -13,9 +13,6 @@
         $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                   <i class="fa fa-lg fa-fw fa-trash"></i>
               </button>';
-        $btnDetails = '<button class="btn btn-xs btn-default text-teal mx-1 shadow" title="Details">
-                   <i class="fa fa-lg fa-fw fa-eye"></i>
-               </button>';
     @endphp
 
     {{-- Minimal example / fill data using the component slot --}}

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -38,4 +39,6 @@ Route::middleware([
     Route::resource('/usuarios', UserController::class)->names('usuarios');
 
     Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
+
+    Route::resource('/habitaciones', HabitacionController::class)->names('habitaciones');
 });
