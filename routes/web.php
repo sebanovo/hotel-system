@@ -30,7 +30,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('sistema.dashboard');
     })->name('dashboard');
 
     Route::resource('/roles', RoleController::class)->names('roles');

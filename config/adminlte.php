@@ -320,6 +320,12 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
+
+        [
+            'text' => 'Inicio',
+            'url' => '/dashboard',
+            'icon' => 'fas fa-tachometer-alt',
+        ],
         [
             'header' => 'Roles y permisos',
             'can' => 'Administrar roles y permisos'
