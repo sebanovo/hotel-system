@@ -1,9 +1,9 @@
 @role('Administrador')
-    @includeIf('dashboards.administrador')
+    @includeIf('sistema.dashboards.administrador')
     @elserole('Recepcionista')
-    @includeIf('dashboards.recepcionista')
+    @includeIf('sistema.dashboards.recepcionista')
     @elserole('Cliente')
-    @includeIf('dashboards.cliente')
+    @includeIf('sistema.dashboards.cliente')
 @else
     <p>No hay un panel asignado</p>
 @endrole
