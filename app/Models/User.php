@@ -85,4 +85,14 @@ class User extends Authenticatable
     {
         return $this->profile_photo_path;
     }
+
+    public function adminlte_desc()
+    {
+        return 'I\'m a nice guy';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
 }
