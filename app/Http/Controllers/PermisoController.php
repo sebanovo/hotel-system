@@ -7,6 +7,10 @@ use Spatie\Permission\Models\Permission;
 
 class PermisoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Administrar roles y permisos')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */

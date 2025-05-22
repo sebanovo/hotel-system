@@ -31,17 +31,19 @@ class RolesAndPermissionsSeeder extends Seeder
             'Eliminar habitaciones',
 
             'Administrar roles y permisos', // Administrar roles y permisos
+            'Gestionar roles',
             'Crear roles',
             'Leer roles',
             'Actualizar roles',
             'Eliminar roles',
 
-            'Gestionar bitacoras', // Gestionar bitacoras
-
+            'Gestionar permisos',
             'Crear permisos',
             'Leer permisos',
             'Actualizar permisos',
             'Eliminar permisos',
+
+            'Gestionar bitacoras', // Gestionar bitacoras
 
             'Gestionar reservas', // Gestionar reservas 
             'Crear reservas',

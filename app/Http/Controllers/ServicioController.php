@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ServicioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Gestionar servicios')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      */
