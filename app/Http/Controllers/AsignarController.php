@@ -51,7 +51,7 @@ class AsignarController extends Controller
         $usuario = User::find($id);
         $roles = Role::all();
 
-        return view('sistema.usuarios.usuario_rol', compact('usuario', 'roles'));
+        return view('sistema.roles_y_permisos.usuario_rol', compact('usuario', 'roles'));
     }
 
     /**
