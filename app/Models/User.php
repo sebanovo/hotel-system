@@ -60,8 +60,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-    
-        public function cliente_nota_ventas()
+
+    public function cliente_nota_ventas()
     {
         return $this->hasMany(NotaVenta::class, 'user_cliente_id');
     }
@@ -79,5 +79,10 @@ class User extends Authenticatable
     public function reservas()
     {
         return $this->hasMany(Reserva::class, 'user_cliente_id');
+    }
+
+    public function adminlte_image()
+    {
+        return $this->profile_photo_path;
     }
 }
