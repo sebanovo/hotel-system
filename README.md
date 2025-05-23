@@ -97,17 +97,17 @@ git checkout -b <nueva_rama>
 ```bash
 composer install
 
-npm install
+npm run install
+
+npm run build
 
 cp .env.example .env
 
 php artisan key:generate
 
+php aritsan migrate
+
 php artisan migrate --seed
-
-npm run istall
-
-npm run build
 
 php artisan serve
 ```
