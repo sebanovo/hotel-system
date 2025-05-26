@@ -83,7 +83,7 @@ class User extends Authenticatable
 
     public function adminlte_image()
     {
-        return $this->profile_photo_path;
+        return $this->profile_photo_path ?? 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
     }
 
     public function adminlte_desc()
