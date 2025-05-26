@@ -1,7 +1,7 @@
 # 🏨 Sistema de Gestión Hotelera - Laravel
 
 <div align="center">
-    <img alt="Diagrama de clases" src="https://github.com/user-attachments/assets/df45944d-b0a6-44c3-a7d9-adc6e8cedcb4">
+    <img alt="Diagrama de clases" src="https://github.com/user-attachments/assets/3bf6c895-a6b7-4622-9903-5ea20675a84a">
     <img alt="Home page" src="https://github.com/user-attachments/assets/43cff889-9e66-40d2-95c0-64c1068fa72b">
     <img alt="Administrador View" src="https://github.com/user-attachments/assets/bde8b923-dc25-496d-8051-7b8b292f52bd">
 </div>
