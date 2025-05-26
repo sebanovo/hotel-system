@@ -88,7 +88,8 @@ class User extends Authenticatable
 
     public function adminlte_desc()
     {
-        return 'I\'m a nice guy';
+        $allRoles = $this->getRoleNames();
+        return $allRoles->isEmpty() ? 'Sin rol asignado' : $allRoles->implode(', ');
     }
 
     public function adminlte_profile_url()
