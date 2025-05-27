@@ -97,7 +97,7 @@ git checkout -b <nueva_rama>
 ```bash
 composer install
 
-npm run install
+npm install
 
 npm run build
 
