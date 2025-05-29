@@ -6,14 +6,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function __construct()
     {
         $this->middleware('can:Gestionar usuarios')->only(
-            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+            ['index', 'create', 'store', 'edit', 'update', 'destroy', 'csv', 'pdf']
         );
+        $this->middleware('can:Ver perfil')->only('show');
     }
     /**
      * Display a listing of the resource.
@@ -59,7 +62,13 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $usuario = User::findOrFail($id);
+
+        // Si el usuario autenticado no coincide con el solicitado, aborta con 403
+        if (Auth::id() !== $usuario->id) {
+            abort(403, 'Forbidden');
+        }
+        return view('sistema.perfil.ver_perfil', compact('usuario'));
     }
 
     /**
@@ -121,10 +130,39 @@ class UserController extends Controller
 
         return Response::stream($callback, 200, $headers);
     }
+
     public function pdf()
     {
         $usuarios = User::all();
         $pdf = Pdf::loadView('sistema.pdf.usuarios', compact('usuarios'));
         return $pdf->download('usuarios.pdf');
+    }
+
+    public function cambiarPassword(Request $request, string $id)
+    {
+        $usuario = User::findOrFail($id);
+
+        // Asegúrate de que solo el usuario autenticado pueda cambiar su propia contraseña
+        if (Auth::id() !== $usuario->id) {
+            abort(403, 'Forbidden');
+        }
+
+        // Validación de las contraseñas
+        $request->validate([
+            'actual_password'    => 'required|string|min:8|max:256',
+            'nueva_password'     => 'required|string|min:8|max:256',
+            'confirmar_password' => 'required|string|min:8|max:256|same:nueva_password',
+        ]);
+
+        // Verificar contraseña actual
+        if (!Hash::check($request->input('actual_password'), $usuario->password)) {
+            return back()->withErrors(['actual_password' => 'La contraseña actual es incorrecta.']);
+        }
+
+        // Guardar nueva contraseña hasheada
+        $usuario->password = Hash::make($request->input('nueva_password'));
+        $usuario->save();
+
+        return redirect()->route('login')->with('success', 'Contraseña cambiada con éxito. Por favor, inicia sesión nuevamente.');
     }
 }

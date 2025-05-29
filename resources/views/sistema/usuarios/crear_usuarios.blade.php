@@ -21,7 +21,7 @@
                     </x-slot>
                 </x-adminlte-input>
 
-                <x-adminlte-input type="text" name="email" label="email" placeholder="correo@gmail.com"
+                <x-adminlte-input type="text" name="email" label="Correo" placeholder="correo@gmail.com"
                     label-class="text-lightblue" value="{{ old('email') }}">
                     <x-slot name="prependSlot">
                         <div class="input-group-text">

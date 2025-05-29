@@ -52,6 +52,9 @@ Route::middleware([
         Route::resource('/usuarios', UserController::class)->names('usuarios');
         Route::get('/usuarios/exportar/csv', [UserController::class, 'csv'])->name('usuarios.exportar.csv');
         Route::get('/usuarios/exportar/pdf', [UserController::class, 'pdf'])->name('usuarios.exportar.pdf');
+
+        Route::get('/perfil/{id}', [UserController::class, 'show'])->name('profile.show');
+        Route::put('/perfil/{id}/cambiar-password', [UserController::class, 'cambiarPassword'])->name('usuarios.cambiarPassword');
     }
 
     // habitaciones
