@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Bitacora;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BitacoraController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Gestionar bitacoras')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+        $this->middleware('can:Gestionar bitacoras')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
     }
     /**
      * Display a listing of the resource.
@@ -67,5 +71,44 @@ class BitacoraController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function csv()
+    {
+        $bitacoras = Bitacora::all();
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=bitacora.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $callback = function () use ($bitacoras) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['ID', 'Usuario', 'Correo', 'IP', 'Accion', 'Fecha y Hora']);
+            foreach ($bitacoras as $bitacora) {
+                fputcsv($handle, [
+                    $bitacora->id,
+                    $bitacora->user->name,
+                    $bitacora->user->email,
+                    $bitacora->ip,
+                    $bitacora->accion,
+                    $bitacora->created_at->format('d/m/Y H:i:s')
+                ]);
+            }
+            fclose($handle);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function pdf()
+    {
+        $bitacoras = Bitacora::all();
+        $pdf = Pdf::loadView('sistema.pdf.bitacora', compact('bitacoras'));
+        return $pdf->download('bitacora.pdf');
     }
 }

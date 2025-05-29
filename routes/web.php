@@ -32,6 +32,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('sistema.dashboard');
     })->name('dashboard');;
+
     //  roles
     {
         Route::resource('/roles', RoleController::class)->names('roles');
@@ -67,6 +68,11 @@ Route::middleware([
         Route::get('/servicios/exportar/pdf', [ServicioController::class, 'pdf'])->name('servicios.exportar.pdf');
     }
 
+    // bitacora
+    {
+        Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
+        Route::get('/bitacora/exportar/csv', [BitacoraController::class, 'csv'])->name('bitacora.exportar.csv');
+        Route::get('/bitacora/exportar/pdf', [BitacoraController::class, 'pdf'])->name('bitacora.exportar.pdf');
+    }
     Route::resource('/asignar', AsignarController::class)->names('asignar');
-    Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
 });
