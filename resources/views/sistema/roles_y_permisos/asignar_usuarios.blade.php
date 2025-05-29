@@ -8,7 +8,7 @@
 
 @section('content')
     @php
-        $heads = ['ID', 'Nombre', 'Correo', 'Rol', ['label' => 'Actions', 'no-export' => true, 'width' => 15]];
+        $heads = ['ID', 'Nombre', 'Correo', 'Rol', ['label' => 'Acciones', 'no-export' => true, 'width' => 15]];
     @endphp
 
     <div class="card">

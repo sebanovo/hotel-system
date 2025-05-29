@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class UserController extends Controller
 {
@@ -91,5 +93,37 @@ class UserController extends Controller
         $usuario = User::find($id);
         $usuario->delete();
         return back()->with('success', 'Usuario eliminado con éxito');
+    }
+
+    public function csv()
+    {
+        $usuarios = User::all();
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=usuarios.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $callback = function () use ($usuarios) {
+            $handle = fopen('php://output', 'w');
+            // Encabezados del CSV
+            fputcsv($handle, ['ID', 'Nombre', 'Correo']);
+            // Filas
+            foreach ($usuarios as $user) {
+                fputcsv($handle, [$user->id, $user->name, $user->email]);
+            }
+            fclose($handle);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+    public function pdf()
+    {
+        $usuarios = User::all();
+        $pdf = Pdf::loadView('sistema.pdf.usuarios', compact('usuarios'));
+        return $pdf->download('usuarios.pdf');
     }
 }

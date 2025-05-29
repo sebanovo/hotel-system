@@ -8,7 +8,7 @@
 
 @section('content')
     @php
-        $heads = ['ID', 'Nombre', ['label' => 'Actions', 'no-export' => true, 'width' => 15]];
+        $heads = ['ID', 'Nombre', ['label' => 'Acciones', 'no-export' => true, 'width' => 15]];
 
         $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                   <i class="fa fa-lg fa-fw fa-trash"></i>
@@ -22,7 +22,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-plus" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
             </div>
             <x-adminlte-datatable id="table1" :heads="$heads" class="card-body">

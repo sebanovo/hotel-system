@@ -37,7 +37,12 @@ Route::middleware([
     Route::resource('/permisos', PermisoController::class)->names('permisos');
     Route::resource('/asignar', AsignarController::class)->names('asignar');
 
-    Route::resource('/usuarios', UserController::class)->names('usuarios');
+    {
+        Route::resource('/usuarios', UserController::class)->names('usuarios');
+        Route::get('/usuarios/exportar/csv', [UserController::class, 'csv'])->name('usuarios.exportar.csv');
+        Route::get('/usuarios/exportar/pdf', [UserController::class, 'pdf'])->name('usuarios.exportar.pdf');
+    }
+
 
     Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
 

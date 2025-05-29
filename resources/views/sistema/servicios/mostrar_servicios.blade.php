@@ -13,7 +13,7 @@
             'Nombre',
             'Descripcion',
             'Precio (Bs)',
-            ['label' => 'Actions', 'no-export' => true, 'width' => 15],
+            ['label' => 'Acciones', 'no-export' => true, 'width' => 15],
         ];
 
         $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
@@ -26,7 +26,7 @@
     <div class="card">
         <div class="card-body">
             <div>
-                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-plus" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
             </div>
             <x-adminlte-modal id="modalPurple" title="Nuevo servicio" theme="primary" icon="fas fa-bolt" size='lg'

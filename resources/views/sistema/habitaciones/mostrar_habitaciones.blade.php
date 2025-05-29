@@ -16,7 +16,7 @@
             'Tipo',
             'Estado',
             'Articulos',
-            ['label' => 'Actions', 'no-export' => true, 'width' => 15],
+            ['label' => 'Acciones', 'no-export' => true, 'width' => 15],
         ];
 
         $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
