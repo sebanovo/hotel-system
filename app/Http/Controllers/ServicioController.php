@@ -35,6 +35,17 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre' => 'required|string|max:100',
+            'descripcion' => 'required|string|max:255',
+            'precio' => 'required|numeric|min:0',
+        ]);
+        $servicio = new Servicio();
+        $servicio->nombre = $request->input('nombre');
+        $servicio->descripcion = $request->input('descripcion');
+        $servicio->precio = $request->input('precio');
+        $servicio->save();
+        return back()->with('success', 'Servicio creado con éxito');
     }
 
     /**

@@ -25,6 +25,25 @@
     {{-- <x-adminlte-datatable id="table1" :heads="$heads" :config="$config"> --}}
     <div class="card">
         <div class="card-body">
+            <div>
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-key" class="float-right my-3" data-toggle="modal"
+                    data-target="#modalPurple" />
+            </div>
+            <x-adminlte-modal id="modalPurple" title="Nuevo servicio" theme="primary" icon="fas fa-bolt" size='lg'
+                disable-animations>
+                <form class="form-crear" action="{{ route('servicios.store') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <x-adminlte-input name="nombre" label="Nombre" placeholder="nombre servicio" fgroup-class="col-md-6"
+                            disable-feedback />
+                        <x-adminlte-input name="descripcion" label="Descripcion" placeholder="descripcion" fgroup-class="col-md-6"
+                            disable-feedback />
+                        <x-adminlte-input name="precio" label="Precio" placeholder="100.0" fgroup-class="col-md-6"
+                            disable-feedback />
+                    </div>
+                    <x-adminlte-button type="submit" label="Guardar" theme="primary" icon="fas fa-save" />
+                </form>
+            </x-adminlte-modal>
             <x-adminlte-datatable id="table1" :heads="$heads">
                 @foreach ($servicios as $servicio)
                     <tr>
