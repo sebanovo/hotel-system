@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Hotel</b> LP',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -171,12 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
-    'classes_auth_body' => '',
-    'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_card'   => 'card shadow-lg border-0 rounded-lg bg-light',
+    'classes_auth_header' => 'bg-gradient-primary text-white text-center rounded-top',
+    'classes_auth_body'   => 'bg-white rounded-bottom',
+    'classes_auth_footer' => 'bg-light border-top text-muted text-center',
+    'classes_auth_icon'   => 'text-primary',
+    'classes_auth_btn'    => 'btn btn-primary btn-block rounded-pill shadow-sm',
 
     /*
     |--------------------------------------------------------------------------
@@ -191,16 +191,16 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
-    'classes_brand_text' => '',
+    'classes_brand' => 'bg-gradient-primary',
+    'classes_brand_text' => 'font-weight-bold',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
-    'classes_content' => '',
+    'classes_content' => 'container-fluid',
     'classes_sidebar' => 'sidebar-dark-primary elevation-4',
-    'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_sidebar_nav' => 'nav-child-indent text-sm',
+    'classes_topnav' => 'navbar-dark shadow-sm',
     'classes_topnav_nav' => 'navbar-expand',
-    'classes_topnav_container' => 'container',
+    'classes_topnav_container' => 'container-fluid',
 
     /*
     |--------------------------------------------------------------------------
@@ -236,7 +236,7 @@ return [
     |
     */
 
-    'right_sidebar' => true,
+    'right_sidebar' => false,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
