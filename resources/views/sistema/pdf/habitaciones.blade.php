@@ -19,7 +19,6 @@
         }
 
         .table {
-            width: 100%;
             font-size: 0.875rem;
             color: #1f2937;
             background-color: white;
@@ -56,24 +55,34 @@
 </head>
 
 <body>
-    <h1>Lista de Usuarios</h1>
+    <h1>Lista de Habitaciones</h1>
     <div class="table-container">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
+                    <th>Capacidad</th>
+                    <th>Precio(Bs)</th>
+                    <th>Piso</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Articulos</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($usuarios as $usuario)
+                @foreach ($habitaciones as $habitacion)
                     <tr>
-                        <td>{{ $usuario->id }}</td>
-                        <td>{{ $usuario->name }}</td>
-                        <td>{{ $usuario->email }}</td>
-                        <td>{{ implode(', ', $usuario->getRoleNames()->toArray()) }}</td>
+                        <td>{{ $habitacion->nro }}</td>
+                        <td>{{ $habitacion->capacidad }}</td>
+                        <td>{{ number_format($habitacion->precio, 2) }}</td>
+                        <td>{{ $habitacion->piso->nombre }}</td>
+                        <td>{{ $habitacion->tipo_habitacion->nombre }}</td>
+                        <td>{{ $habitacion->estado->nombre }}</td>
+                        <td>
+                            {{ $habitacion->detalle_habitacion->map(function ($detalle) {
+                                    return str_replace(' ', '', $detalle->articulos->nombre);
+                                })->implode(', ') }}
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

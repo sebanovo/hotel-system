@@ -25,19 +25,28 @@
     {{-- <x-adminlte-datatable id="table1" :heads="$heads" :config="$config"> --}}
     <div class="card">
         <div class="card-body">
-            <div>
+            <div class="my-3">
                 <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-plus" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
+
+                <a href="{{ route('servicios.exportar.pdf') }}">
+                    <x-adminlte-button type="submit" label="Submit" theme="danger" icon="fas fa-file-pdf" label="pdf" />
+                </a>
+
+                <a href="{{ route('servicios.exportar.csv') }}">
+                    <x-adminlte-button type="submit" label="Submit" theme="success" icon="fas fa-file-csv"
+                        label="csv" />
+                </a>
             </div>
             <x-adminlte-modal id="modalPurple" title="Nuevo servicio" theme="primary" icon="fas fa-bolt" size='lg'
                 disable-animations>
                 <form class="form-crear" action="{{ route('servicios.store') }}" method="POST">
                     @csrf
                     <div class="row">
-                        <x-adminlte-input name="nombre" label="Nombre" placeholder="nombre servicio" fgroup-class="col-md-6"
-                            disable-feedback />
-                        <x-adminlte-input name="descripcion" label="Descripcion" placeholder="descripcion" fgroup-class="col-md-6"
-                            disable-feedback />
+                        <x-adminlte-input name="nombre" label="Nombre" placeholder="nombre servicio"
+                            fgroup-class="col-md-6" disable-feedback />
+                        <x-adminlte-input name="descripcion" label="Descripcion" placeholder="descripcion"
+                            fgroup-class="col-md-6" disable-feedback />
                         <x-adminlte-input name="precio" label="Precio" placeholder="100.0" fgroup-class="col-md-6"
                             disable-feedback />
                     </div>
@@ -61,8 +70,8 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
-                                        <x-adminlte-input name="nombre" label="Precio (Bs)" value="{{ $servicio->nombre }}"
-                                            fgroup-class="col-md-6" disable-feedback />
+                                        <x-adminlte-input name="nombre" label="Precio (Bs)"
+                                            value="{{ $servicio->nombre }}" fgroup-class="col-md-6" disable-feedback />
                                         <x-adminlte-input name="descripcion" label="Descripcion" fgroup-class="col-md-6"
                                             disable-feedback value="{{ $servicio->descripcion }}" />
                                         <x-adminlte-input name="precio" label="Precio" fgroup-class="col-md-6"

@@ -19,7 +19,6 @@
         }
 
         .table {
-            width: 100%;
             font-size: 0.875rem;
             color: #1f2937;
             background-color: white;
@@ -56,24 +55,24 @@
 </head>
 
 <body>
-    <h1>Lista de Usuarios</h1>
+    <h1>Lista de Servicios</h1>
     <div class="table-container">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
+                    <th>Descripcion</th>
+                    <th>Precio (Bs)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($usuarios as $usuario)
+                @foreach ($servicios as $servicio)
                     <tr>
-                        <td>{{ $usuario->id }}</td>
-                        <td>{{ $usuario->name }}</td>
-                        <td>{{ $usuario->email }}</td>
-                        <td>{{ implode(', ', $usuario->getRoleNames()->toArray()) }}</td>
+                        <td>{{ $servicio->id }}</td>
+                        <td>{{ $servicio->nombre }}</td>
+                        <td>{{ $servicio->descripcion }}</td>
+                        <td>{{ number_format($servicio->precio, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>

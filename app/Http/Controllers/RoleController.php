@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class RoleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Administrar roles y permisos')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+        $this->middleware('can:Administrar roles y permisos')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
     }
     /**
      * Display a listing of the resource.
@@ -79,5 +83,37 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->delete();
         return back()->with('success', 'Rol eliminado con éxito');
+    }
+
+    public function csv()
+    {
+        $roles = Role::all();
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=roles.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $callback = function () use ($roles) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['ID', 'Nombre']);
+            foreach ($roles as $role) {
+                fputcsv($handle, [$role->id, $role->name]);
+            }
+            fclose($handle);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function pdf()
+    {
+        $roles = Role::all();
+        $pdf = Pdf::loadView('sistema.pdf.roles', compact('roles'));
+        return $pdf->download('roles.pdf');
     }
 }

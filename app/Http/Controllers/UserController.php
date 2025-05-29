@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Gestionar usuarios')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+        $this->middleware('can:Gestionar usuarios')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
     }
     /**
      * Display a listing of the resource.
@@ -109,11 +111,10 @@ class UserController extends Controller
 
         $callback = function () use ($usuarios) {
             $handle = fopen('php://output', 'w');
-            // Encabezados del CSV
-            fputcsv($handle, ['ID', 'Nombre', 'Correo']);
-            // Filas
-            foreach ($usuarios as $user) {
-                fputcsv($handle, [$user->id, $user->name, $user->email]);
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['ID', 'Nombre', 'Correo', 'Rol']);
+            foreach ($usuarios as $usuario) {
+                fputcsv($handle, [$usuario->id, $usuario->name, $usuario->email, implode(', ', $usuario->getRoleNames()->toArray())]);
             }
             fclose($handle);
         };

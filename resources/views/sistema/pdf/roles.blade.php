@@ -56,24 +56,20 @@
 </head>
 
 <body>
-    <h1>Lista de Usuarios</h1>
+    <h1>Lista de Roles</h1>
     <div class="table-container">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($usuarios as $usuario)
+                @foreach ($roles as $role)
                     <tr>
-                        <td>{{ $usuario->id }}</td>
-                        <td>{{ $usuario->name }}</td>
-                        <td>{{ $usuario->email }}</td>
-                        <td>{{ implode(', ', $usuario->getRoleNames()->toArray()) }}</td>
+                        <td>{{ $role->id }}</td>
+                        <td>{{ $role->name }}</td>
                     </tr>
                 @endforeach
             </tbody>

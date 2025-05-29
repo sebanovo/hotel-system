@@ -28,6 +28,16 @@
     {{-- <x-adminlte-datatable id="table1" :heads="$heads" :config="$config"> --}}
     <div class="card">
         <div class="card-body">
+            <div class="my-3">
+                <a href="{{ route('habitaciones.exportar.pdf') }}">
+                    <x-adminlte-button type="submit" label="Submit" theme="danger" icon="fas fa-file-pdf" label="pdf" />
+                </a>
+
+                <a href="{{ route('habitaciones.exportar.csv') }}">
+                    <x-adminlte-button type="submit" label="Submit" theme="success" icon="fas fa-file-csv"
+                        label="csv" />
+                </a>
+            </div>
             <x-adminlte-datatable id="table1" :heads="$heads">
                 @foreach ($habitaciones as $habitacion)
                     <tr>

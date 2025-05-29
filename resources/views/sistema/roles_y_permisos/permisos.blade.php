@@ -21,9 +21,18 @@
 
     <div class="card">
         <div class="card-body">
-            <div>
+            <div class="my-3">
                 <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-plus" class="float-right my-3" data-toggle="modal"
                     data-target="#modalPurple" />
+
+                <a href="{{ route('permisos.exportar.pdf') }}">
+                    <x-adminlte-button type="submit" label="Submit" theme="danger" icon="fas fa-file-pdf" label="pdf" />
+                </a>
+
+                <a href="{{ route('permisos.exportar.csv') }}">
+                    <x-adminlte-button type="submit" label="Submit" theme="success" icon="fas fa-file-csv"
+                        label="csv" />
+                </a>
             </div>
             <x-adminlte-datatable id="table1" :heads="$heads" class="card-body">
                 @foreach ($permisos as $permiso)

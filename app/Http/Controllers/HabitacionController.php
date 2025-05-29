@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Habitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HabitacionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Gestionar habitaciones')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+        $this->middleware('can:Gestionar habitaciones')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
     }
     /**
      * Display a listing of the resource.
@@ -77,5 +81,46 @@ class HabitacionController extends Controller
         $habitacion = Habitacion::find($id);
         $habitacion->delete();
         return back()->with('success', 'Habitacion eliminada con éxito');
+    }
+
+    public function csv()
+    {
+        $habitaciones = Habitacion::all();
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=habitaciones.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $callback = function () use ($habitaciones) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['Nro', 'Capacidad', 'Precio (Bs)', 'Piso', 'Tipo', 'Articulos']);
+            foreach ($habitaciones as $habitacion) {
+                fputcsv($handle, [
+                    $habitacion->nro,
+                    $habitacion->capacidad,
+                    number_format($habitacion->precio, 2),
+                    $habitacion->piso->nombre,
+                    $habitacion->tipo_habitacion->nombre,
+                    $habitacion->detalle_habitacion->map(function ($detalle) {
+                        return str_replace(' ', '', $detalle->articulos->nombre);
+                    })->implode(', '),
+                ]);
+            }
+            fclose($handle);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function pdf()
+    {
+        $habitaciones = Habitacion::all();
+        $pdf = Pdf::loadView('sistema.pdf.habitaciones', compact('habitaciones'));
+        return $pdf->download('habitaciones.pdf');
     }
 }

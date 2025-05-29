@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ServicioController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Gestionar servicios')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+        $this->middleware('can:Gestionar servicios')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
     }
     /**
      * Display a listing of the resource.
@@ -87,5 +91,37 @@ class ServicioController extends Controller
         $servicio = Servicio::find($id);
         $servicio->delete();
         return back()->with('success', 'Servicio eliminado con éxito');
+    }
+
+    public function csv()
+    {
+        $servicios = Servicio::all();
+
+        $headers = [
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=servicios.csv",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        ];
+
+        $callback = function () use ($servicios) {
+            $handle = fopen('php://output', 'w');
+            fwrite($handle, "\xEF\xBB\xBF");
+            fputcsv($handle, ['ID', 'Nombre', 'Descripción', 'Precio (Bs)']);
+            foreach ($servicios as $servicio) {
+                fputcsv($handle, [$servicio->id, $servicio->nombre, $servicio->descripcion, number_format($servicio->precio, 2)]);
+            }
+            fclose($handle);
+        };
+
+        return Response::stream($callback, 200, $headers);
+    }
+
+    public function pdf()
+    {
+        $servicios = Servicio::all();
+        $pdf = Pdf::loadView('sistema.pdf.servicios', compact('servicios'));
+        return $pdf->download('servicios.pdf');
     }
 }
