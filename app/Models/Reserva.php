@@ -37,5 +37,4 @@ class Reserva extends Model
     {
         return $this->hasMany(DetalleReserva::class, 'reserva_id');
     }
-
 }

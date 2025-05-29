@@ -4,6 +4,7 @@ use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\UserController;
@@ -62,6 +63,13 @@ Route::middleware([
         Route::resource('/habitaciones', HabitacionController::class)->names('habitaciones');
         Route::get('/habitaciones/exportar/csv', [HabitacionController::class, 'csv'])->name('habitaciones.exportar.csv');
         Route::get('/habitaciones/exportar/pdf', [HabitacionController::class, 'pdf'])->name('habitaciones.exportar.pdf');
+    }
+
+    // reservas 
+    {
+        Route::resource('/reservas', ReservaController::class)->names('reservas');
+        Route::get('/reservas/exportar/csv', [ReservaController::class, 'csv'])->name('reservas.exportar.csv');
+        Route::get('/reservas/exportar/pdf', [ReservaController::class, 'pdf'])->name('reservas.exportar.pdf');
     }
 
     // servicios

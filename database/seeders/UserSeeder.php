@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         User::create([
             'id' => 2,
             'name' => 'Sebastian',
-            'email' => 'sebastianl2002@gmail.com',
+            'email' => 'sebastian2002@gmail.com',
             'password' => bcrypt('123456789'),
             'profile_photo_path' => 'https://randomuser.me/api/portraits/men/1.jpg'
         ]);

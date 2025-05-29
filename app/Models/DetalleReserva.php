@@ -18,7 +18,7 @@ class DetalleReserva extends Model
         'habitacion_id',
     ];
 
-    public function habitacions()
+    public function habitacion()
     {
         return $this->belongsTo(Habitacion::class, 'habitacion_id');
     }
@@ -27,5 +27,4 @@ class DetalleReserva extends Model
     {
         return $this->belongsTo(Reserva::class, 'reserva_id');
     }
-
 }

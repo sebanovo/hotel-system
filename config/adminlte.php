@@ -371,6 +371,19 @@ return [
             'icon' => 'fas fa-fw fa-door-closed',
             'can' => 'Gestionar habitaciones'
         ],
+
+        [
+            'header' => 'Reservas',
+            'can' => 'Gestionar reservas'
+        ],
+
+        [
+            'text' => 'Mostrar reservas',
+            'route' => 'reservas.index',
+            'icon' => 'fas fa-calendar-check',
+            'can' => 'Gestionar reservas'
+        ],
+
         [
             'header' => 'Servicios',
             'can' => 'Gestionar servicios'
