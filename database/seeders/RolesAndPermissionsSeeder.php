@@ -89,6 +89,12 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Actualizar habitaciones',
                 'Eliminar habitaciones',
 
+                'Gestionar reservas', // Gestionar reservas 
+                'Crear reservas',
+                'Leer reservas',
+                'Actualizar reservas',
+                'Eliminar reservas',
+
                 'Gestionar servicios', // Gestionar servicios 
                 'Crear servicios',
                 'Leer servicios',
