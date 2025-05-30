@@ -14,6 +14,23 @@
                   <i class="fa fa-lg fa-fw fa-trash"></i>
               </button>';
 
+        $config = [
+            'language' => [
+                'lengthMenu' => 'Mostrar _MENU_ registros por página',
+                'zeroRecords' => 'No se encontraron resultados',
+                'info' => 'Mostrando página _PAGE_ de _PAGES_',
+                'infoEmpty' => 'No hay registros disponibles',
+                'infoFiltered' => '(filtrados de _MAX_ registros totales)',
+                'search' => 'Buscar:',
+                'paginate' => [
+                    'first' => 'Primera',
+                    'last' => 'Última',
+                    'next' => 'Siguiente',
+                    'previous' => 'Anterior',
+                ],
+            ],
+        ];
+
     @endphp
 
     <div class="card">
@@ -33,7 +50,7 @@
                         label="csv" />
                 </a>
             </div>
-            <x-adminlte-datatable id="table1" :heads="$heads">
+            <x-adminlte-datatable id="table1" :heads="$heads" :config="$config">
                 @foreach ($usuarios as $usuario)
                     <tr>
                         <td>{{ $usuario->id }}</td>

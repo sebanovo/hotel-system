@@ -8,12 +8,28 @@
 
 @section('content')
     @php
+        $config = [
+            'language' => [
+                'lengthMenu' => 'Mostrar _MENU_ registros por página',
+                'zeroRecords' => 'No se encontraron resultados',
+                'info' => 'Mostrando página _PAGE_ de _PAGES_',
+                'infoEmpty' => 'No hay registros disponibles',
+                'infoFiltered' => '(filtrados de _MAX_ registros totales)',
+                'search' => 'Buscar:',
+                'paginate' => [
+                    'first' => 'Primera',
+                    'last' => 'Última',
+                    'next' => 'Siguiente',
+                    'previous' => 'Anterior',
+                ],
+            ],
+        ];
         $heads = ['ID', 'Nombre', 'Correo', 'Rol', ['label' => 'Acciones', 'no-export' => true, 'width' => 15]];
     @endphp
 
     <div class="card">
         <div class="card-body">
-            <x-adminlte-datatable id="table1" :heads="$heads" class="card-body">
+            <x-adminlte-datatable id="table1" :heads="$heads" class="card-body" :config="$config">
                 @foreach ($usuarios as $usuario)
                     <tr>
                         <td>{{ $usuario->id }}</td>
