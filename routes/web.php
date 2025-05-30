@@ -7,6 +7,7 @@ use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\TipoPagoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,6 +78,13 @@ Route::middleware([
         Route::resource('/servicios', ServicioController::class)->names('servicios');
         Route::get('/servicios/exportar/csv', [ServicioController::class, 'csv'])->name('servicios.exportar.csv');
         Route::get('/servicios/exportar/pdf', [ServicioController::class, 'pdf'])->name('servicios.exportar.pdf');
+    }
+
+    // tipo pago 
+    {
+        Route::resource('/tipo_pago', TipoPagoController::class)->names('tipo_pagos');
+        Route::get('/tipo_pago/exportar/csv', [TipoPagoController::class, 'csv'])->name('tipo_pagos.exportar.csv');
+        Route::get('/tipo_pago/exportar/pdf', [TipoPagoController::class, 'pdf'])->name('tipo_pagos.exportar.pdf');
     }
 
     // bitacora

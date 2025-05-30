@@ -397,6 +397,18 @@ return [
         ],
 
         [
+            'header' => 'Tipo Pagos',
+            'can' => 'Gestionar tipo pagos'
+        ],
+
+        [
+            'text' => 'Mostrar tipo pagos',
+            'route' => 'tipo_pagos.index',
+            'icon' => 'fas fa-money-bill-alt',
+            'can' => 'Gestionar tipo pagos'
+        ],
+
+        [
             'header' => 'Bitacora',
             'can' => 'Gestionar bitacoras'
         ],

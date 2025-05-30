@@ -24,6 +24,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'Cambiar contraseña',
             'Gestionar configuraciones',
         ];
+
         $permissions = [
             'Gestionar usuarios', // Gestionar usuarios
             'Crear usuarios',
@@ -65,6 +66,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'Leer servicios',
             'Actualizar servicios',
             'Eliminar servicios',
+
+            'Gestionar tipo pagos', // Gestionar tipo pagos 
+            'Crear tipo pagos',
+            'Leer tipo pagos',
+            'Actualizar tipo pagos',
+            'Eliminar tipo pagos',
         ];
 
         foreach ($permissions as $permission) {
@@ -87,6 +94,12 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Leer servicios',
                 'Actualizar servicios',
                 'Eliminar servicios',
+
+                'Gestionar tipo pagos', // Gestionar tipo pagos 
+                'Crear tipo pagos',
+                'Leer tipo pagos',
+                'Actualizar tipo pagos',
+                'Eliminar tipo pagos',
 
                 ...$compartido
             ],
