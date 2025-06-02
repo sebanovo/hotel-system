@@ -326,93 +326,87 @@ return [
             'url' => '/dashboard',
             'icon' => 'fas fa-tachometer-alt',
         ],
-        [
-            'header' => 'Roles y permisos',
-            'can' => 'Administrar roles y permisos'
-        ],
 
         [
-            'text' => 'asignar roles a usuarios',
-            'route' => 'asignar.index',
-            'icon' => 'fas fa-user-lock',
-            'can' => 'Administrar roles y permisos'
+            'text' => 'Gestionar usuarios',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => ['Gestionar usuarios', 'Administrar roles y permisos', 'Administrar roles y permisos'],
+            'submenu' => [
+                [
+                    'text' => 'Usuarios',
+                    'route' => 'usuarios.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'Gestionar usuarios'
+                ],
+                [
+                    'text' => 'Roles',
+                    'route' => 'roles.index',
+                    'icon' => 'fas fa-user-tie',
+                    'can' => 'Administrar roles y permisos'
+                ],
+                [
+                    'text' => 'Permisos',
+                    'route' => 'permisos.index',
+                    'icon' => 'fas fa-lock',
+                    'can' => 'Administrar roles y permisos'
+                ],
+                [
+                    'text' => 'Asignar roles a usuarios',
+                    'route' => 'asignar.index',
+                    'icon' => 'fas fa-user-lock',
+                    'can' => 'Administrar roles y permisos'
+                ],
+            ],
         ],
         [
-            'text' => 'roles',
-            'route' => 'roles.index',
-            'icon' => 'fas fa-user-tie',
-            'can' => 'Administrar roles y permisos'
+            'text' => 'Gestionar habitacion',
+            'icon' => 'fas fa-fw fa-bed',
+            'can' => ['Gestionar habitaciones'],
+            'submenu' => [
+                [
+                    'text' => 'Habitaciones',
+                    'route' => 'habitaciones.index',
+                    'icon' => 'fas fa-fw fa-door-closed',
+                    'can' => 'Gestionar habitaciones'
+                ],
+            ],
         ],
         [
-            'text' => 'permisos',
-            'route' => 'permisos.index',
-            'icon' => 'fas fa-lock',
-            'can' => 'Administrar roles y permisos'
+            'text' => 'Gestionar reservas',
+            'icon' => 'fas fa-fw fa-calendar-alt',
+            'can' => ['Gestionar reservas', 'Gestionar servicios'],
+            'submenu' => [
+                [
+                    'text' => 'Reservas',
+                    'route' => 'reservas.index',
+                    'icon' => 'fas fa-calendar-check',
+                    'can' => 'Gestionar reservas'
+                ],
+                [
+                    'text' => 'Servicios',
+                    'route' => 'servicios.index',
+                    'icon' => 'fas fa-fw fa-concierge-bell',
+                    'can' => 'Gestionar servicios'
+                ],
+            ],
         ],
         [
-            'header' => 'Usuarios',
-            'can' => 'Gestionar usuarios'
+            'text' => 'Gestionar pagos',
+            'icon' => 'fas fa-fw fa-credit-card',
+            'can' => ['Gestionar tipo pagos'],
+            'submenu' => [
+                [
+                    'text' => 'Tipo Pagos',
+                    'route' => 'tipo_pagos.index',
+                    'icon' => 'fas fa-money-bill-alt',
+                    'can' => 'Gestionar tipo pagos'
+                ]
+            ],
         ],
-
-        [
-            'text' => 'Mostrar usuarios',
-            'route' => 'usuarios.index',
-            'icon' => 'fas fa-fw fa-user',
-            'can' => 'Gestionar usuarios'
-        ],
-        [
-            'header' => 'Habitaciones',
-            'can' => 'Gestionar habitaciones'
-        ],
-
-        [
-            'text' => 'Mostrar habitaciones',
-            'route' => 'habitaciones.index',
-            'icon' => 'fas fa-fw fa-door-closed',
-            'can' => 'Gestionar habitaciones'
-        ],
-
-        [
-            'header' => 'Reservas',
-            'can' => 'Gestionar reservas'
-        ],
-
-        [
-            'text' => 'Mostrar reservas',
-            'route' => 'reservas.index',
-            'icon' => 'fas fa-calendar-check',
-            'can' => 'Gestionar reservas'
-        ],
-
-        [
-            'header' => 'Servicios',
-            'can' => 'Gestionar servicios'
-        ],
-
-        [
-            'text' => 'Mostrar servicios',
-            'route' => 'servicios.index',
-            'icon' => 'fas fa-fw fa-concierge-bell',
-            'can' => 'Gestionar servicios'
-        ],
-
-        [
-            'header' => 'Tipo Pagos',
-            'can' => 'Gestionar tipo pagos'
-        ],
-
-        [
-            'text' => 'Mostrar tipo pagos',
-            'route' => 'tipo_pagos.index',
-            'icon' => 'fas fa-money-bill-alt',
-            'can' => 'Gestionar tipo pagos'
-        ],
-
         [
             'header' => 'Bitacora',
             'can' => 'Gestionar bitacoras'
         ],
-
         [
             'text' => 'Mostrar bitacora',
             'route' => 'bitacora.index',
