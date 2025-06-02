@@ -324,7 +324,7 @@ return [
         [
             'text' => 'Inicio',
             'url' => '/dashboard',
-            'icon' => 'fas fa-tachometer-alt',
+            'icon' => 'fas fa-home',
         ],
 
         [
