@@ -315,11 +315,6 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-        [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
-        ],
 
         [
             'text' => 'Inicio',
@@ -355,7 +350,7 @@ return [
                     'route' => 'asignar.index',
                     'icon' => 'fas fa-user-lock',
                     'can' => 'Administrar roles y permisos'
-                ],
+                ]
             ],
         ],
         [
@@ -401,6 +396,19 @@ return [
                     'icon' => 'fas fa-money-bill-alt',
                     'can' => 'Gestionar tipo pagos'
                 ]
+            ],
+        ],
+        [
+            'text' => 'Gestionar clientes',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'Gestionar clientes',
+            'submenu' => [
+                [
+                    'text' => 'Clientes',
+                    'route' => 'clientes.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'Gestionar clientes'
+                ],
             ],
         ],
         [

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\ReservaController;
@@ -92,6 +93,13 @@ Route::middleware([
         Route::resource('/bitacora', BitacoraController::class)->names('bitacora');
         Route::get('/bitacora/exportar/csv', [BitacoraController::class, 'csv'])->name('bitacora.exportar.csv');
         Route::get('/bitacora/exportar/pdf', [BitacoraController::class, 'pdf'])->name('bitacora.exportar.pdf');
+    }
+
+    // bitacora
+    {
+        Route::resource('/clientes', ClienteController::class)->names('clientes');
+        Route::get('/clientes/exportar/csv', [ClienteController::class, 'csv'])->name('clientes.exportar.csv');
+        Route::get('/clientes/exportar/pdf', [ClienteController::class, 'pdf'])->name('clientes.exportar.pdf');
     }
     Route::resource('/asignar', AsignarController::class)->names('asignar');
 });
