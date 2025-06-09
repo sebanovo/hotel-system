@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articulo;
+use App\Models\Estado;
 use App\Models\Habitacion;
+use App\Models\Piso;
+use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -22,7 +26,11 @@ class HabitacionController extends Controller
     {
         //
         $habitaciones = Habitacion::with('detalle_habitacion.articulos')->get();
-        return view('sistema.habitaciones.mostrar_habitaciones', compact(('habitaciones')));
+        $pisos = Piso::all();
+        $tipo_habitaciones = TipoHabitacion::all();
+        $estado_habitaciones = Estado::all();
+        $articulos = Articulo::all();
+        return view('sistema.habitaciones.mostrar_habitaciones', compact('habitaciones', 'pisos', 'tipo_habitaciones', 'estado_habitaciones', 'articulos'));
     }
 
     /**
@@ -65,10 +73,22 @@ class HabitacionController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'precio' => 'required|numeric|min:0',
+            'capacidad' => 'required|integer|min:1',
+            'tipo' => 'required|exists:tipo_habitacions,id',
+            'piso' => 'required|exists:pisos,id',
+            'estado' => 'required|exists:estados,id',
+        ]);
+
         $habitacion = Habitacion::find($id);
         $habitacion->precio = $request->input('precio');
-        $habitacion->tipo_habitacion_id = $request->input('tipo_habitacion');
+        $habitacion->capacidad = $request->input('capacidad');
+        $habitacion->tipo_habitacion_id = $request->input('tipo');
+        $habitacion->piso_id = $request->input('piso');
+        $habitacion->estado_id = $request->input('estado');
         $habitacion->save();
+
         return redirect()->route('habitaciones.index')->with('success', 'habitacion actualizado con éxito');
     }
 

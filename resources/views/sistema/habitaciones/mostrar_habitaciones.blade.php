@@ -70,17 +70,43 @@
                             <x-adminlte-button label="" theme="primary" icon="fa fa-lg fa-fw fa-pen"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow" data-toggle="modal"
                                 data-target="#modalUpdatehabitacion{{ $habitacion->id }}" />
-                            <x-adminlte-modal id="modalUpdatehabitacion{{ $habitacion->id }}" title="Actualizar habitacion"
-                                theme="primary" icon="fas fa-bolt" size='lg' disable-animations>
+                            <x-adminlte-modal id="modalUpdatehabitacion{{ $habitacion->id }}"
+                                title="Actualizar habitacion {{ $habitacion->nro }}" theme="primary" icon="fas fa-bolt"
+                                size='lg' disable-animations>
                                 <form action="{{ route('habitaciones.update', $habitacion) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <div class="row">
+
+                                    <div class="column">
+                                        <img style="max-width: 300px; max-height: 300;"
+                                            src={{ asset('images/daniela.jpg') }} alt="daniela">
+                                        <x-adminlte-input name="capacidad" label="Capacidad" placeholder="capacidad"
+                                            value="{{ $habitacion->capacidad }}" fgroup-class="col-md-6"
+                                            disable-feedback />
                                         <x-adminlte-input name="precio" label="Precio (Bs)" placeholder="precio (bs)"
                                             value="{{ $habitacion->precio }}" fgroup-class="col-md-6" disable-feedback />
-                                        <x-adminlte-input name="tipo_habitacion" label="Tipo Habitacion"
-                                            fgroup-class="col-md-6" disable-feedback
-                                            value="{{ $habitacion->tipo_habitacion_id }}" />
+
+                                        @php
+                                            $pisoOptions = $pisos->pluck('nombre', 'id')->toArray();
+                                            $tipoOptions = $tipo_habitaciones->pluck('nombre', 'id')->toArray();
+                                            $estadoOptions = $estado_habitaciones->pluck('nombre', 'id')->toArray();
+                                        @endphp
+
+                                        <x-adminlte-select name="piso" label="Piso" igroup-size="sm">
+                                            <x-adminlte-options :options="$pisoOptions" value="{{ $habitacion->estado->id }}"
+                                                required />
+                                        </x-adminlte-select>
+
+                                        <x-adminlte-select name="tipo" label="Tipo" igroup-size="sm">
+                                            <x-adminlte-options :options="$tipoOptions"
+                                                value="{{ $habitacion->tipo_habitacion->id }}" required />
+                                        </x-adminlte-select>
+
+                                        <x-adminlte-select name="estado" label="Estado" igroup-size="sm">
+                                            <x-adminlte-options :options="$estadoOptions" value="{{ $habitacion->estado->id }}"
+                                                required />
+                                        </x-adminlte-select>
+
                                     </div>
                                     <x-adminlte-button type="submit" label="Actualizar" theme="primary"
                                         icon="fas fa-save" />
