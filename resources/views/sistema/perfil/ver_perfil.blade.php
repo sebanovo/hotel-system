@@ -8,15 +8,40 @@
 
 @section('content')
     <div class="card">
+
         <div class="card-body text-center">
             {{-- Mostrar la foto del usuario --}}
-            @if ($usuario->profile_photo_path)
-                <img src="{{ $usuario->profile_photo_path }}" alt="Foto del usuario" class="img-thumbnail mb-3"
-                    style="width: 150px; height: 150px; object-fit: cover;">
+            @if (
+                $usuario->profile_photo_path &&
+                    Storage::disk('public')->exists(str_replace('/storage/', '', $usuario->profile_photo_path)))
+                <img src="{{ $usuario->profile_photo_path }}" class="img-thumbnail rounded-circle mb-3"
+                    style="width: 150px; height: 150px; object-fit: cover;" alt="Foto del usuario">
             @else
-                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Usuario sin foto"
-                    class="img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                    class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;"
+                    alt="Usuario sin foto">
             @endif
+
+            <form action="{{ route('usuarios.updatePhoto', $usuario->id) }}" method="POST" enctype="multipart/form-data"
+                class="mt-3">
+                @csrf
+                @method('PUT')
+
+                <div class="w-50 mx-auto">
+                    <x-adminlte-input-file name="profile_photo" igroup-size="sm" placeholder="Selecciona una foto"
+                        accept="image/*" required>
+                        <x-slot name="appendSlot">
+                            <x-adminlte-button theme="primary" type="submit" label="Actualizar foto" />
+                        </x-slot>
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text bg-lightblue">
+                                <i class="fas fa-upload"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input-file>
+                </div>
+            </form>
+
 
             <div class="mb-3">
                 <label class="form-label text-lightblue"><i class="fas fa-user text-lightblue"></i> Nombre</label>

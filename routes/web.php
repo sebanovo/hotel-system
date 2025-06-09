@@ -56,6 +56,8 @@ Route::middleware([
         Route::get('/usuarios/exportar/csv', [UserController::class, 'csv'])->name('usuarios.exportar.csv');
         Route::get('/usuarios/exportar/pdf', [UserController::class, 'pdf'])->name('usuarios.exportar.pdf');
 
+        Route::put('/usuarios/photo/{id}', [UserController::class, 'updatePhoto'])->name('usuarios.updatePhoto');
+
         Route::get('/perfil/{id}', [UserController::class, 'show'])->name('profile.show');
         Route::put('/perfil/{id}/cambiar-password', [UserController::class, 'cambiarPassword'])->name('usuarios.cambiarPassword');
     }

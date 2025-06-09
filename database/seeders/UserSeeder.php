@@ -17,32 +17,28 @@ class UserSeeder extends Seeder
             'id' => 1,
             'name' => 'Noel',
             'email' => 'noel2002@gmail.com',
-            'password' => bcrypt('123456789'),
-            'profile_photo_path' => 'https://randomuser.me/api/portraits/men/0.jpg'
+            'password' => bcrypt('123456789')
         ]);
 
         User::create([
             'id' => 2,
             'name' => 'Sebastian',
             'email' => 'sebastian2002@gmail.com',
-            'password' => bcrypt('123456789'),
-            'profile_photo_path' => 'https://randomuser.me/api/portraits/men/1.jpg'
+            'password' => bcrypt('123456789')
         ]);
 
         User::create([
             'id' => 3,
             'name' => 'Aldana',
             'email' => 'aldana2002@gmail.com',
-            'password' => bcrypt('123456789'),
-            'profile_photo_path' => 'https://randomuser.me/api/portraits/men/2.jpg'
+            'password' => bcrypt('123456789')
         ]);
 
         User::create([
             'id' => 4,
             'name' => 'Daniela',
             'email' => 'daniela2002@gmail.com',
-            'password' => bcrypt('123456789'),
-            'profile_photo_path' => 'https://randomuser.me/api/portraits/women/0.jpg'
+            'password' => bcrypt('123456789')
         ]);
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -164,5 +165,31 @@ class UserController extends Controller
         $usuario->save();
 
         return redirect()->route('login')->with('success', 'Contraseña cambiada con éxito. Por favor, inicia sesión nuevamente.');
+    }
+
+    public function updatePhoto(Request $request, string $id)
+    {
+        $request->validate([
+            'profile_photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $usuario = User::findOrFail($id);
+        if (Auth::id() !== $usuario->id) {
+            abort(403, 'Forbidden');
+        }
+
+        if ($usuario->profile_photo_path) {
+            $rutaAnterior = str_replace('/storage/', '', $usuario->profile_photo_path);
+
+            if (Storage::disk('public')->exists($rutaAnterior)) {
+                Storage::disk('public')->delete($rutaAnterior);
+            }
+        }
+
+        $path = $request->file('profile_photo')->store('imagenes', 'public');
+        $usuario->profile_photo_path = Storage::url($path);
+        $usuario->save();
+
+        return back()->with('success', 'Foto actualizada correctamente.');
     }
 }
