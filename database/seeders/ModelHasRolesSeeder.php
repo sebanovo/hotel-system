@@ -14,7 +14,6 @@ class ModelHasRolesSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $rolAdministrador = Role::findByName('Administrador', 'sanctum');
         $rolRecepcionista = Role::findByName('Recepcionista', 'sanctum');
         $rolCliente = Role::findByName('Cliente', 'sanctum');
@@ -26,9 +25,12 @@ class ModelHasRolesSeeder extends Seeder
         $user2->assignRole($rolRecepcionista);
 
         $user3 = User::find(3);
-        $user3->assignRole($rolCliente);
+        $user3->assignRole($rolRecepcionista);
 
         $user4 = User::find(4);
+        $user4->assignRole($rolCliente);
+
+        $user4 = User::find(5);
         $user4->assignRole($rolCliente);
     }
 }

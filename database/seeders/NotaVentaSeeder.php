@@ -13,7 +13,6 @@ class NotaVentaSeeder extends Seeder
      */
     public function run(): void
     {
-  
         NotaVenta::create([
             'id' => 1,
             'fecha' => '2023-10-01',
@@ -50,6 +49,5 @@ class NotaVentaSeeder extends Seeder
             'user_cliente_id' => 1,
             'user_empleado_id' => 2,
         ]);
-
     }
 }

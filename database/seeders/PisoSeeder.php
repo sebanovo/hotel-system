@@ -13,7 +13,6 @@ class PisoSeeder extends Seeder
      */
     public function run(): void
     {
-        
         Piso::create([
             'id'=>1,
             'nombre'=>'Piso 1',
