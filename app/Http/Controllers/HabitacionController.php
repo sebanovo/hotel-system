@@ -10,13 +10,14 @@ use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class HabitacionController extends Controller
 {
     public function __construct()
     {
         $this->middleware('can:Gestionar habitaciones')->only(
-            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf', 'foto', 'updatePhoto']
         );
     }
     /**
@@ -55,6 +56,8 @@ class HabitacionController extends Controller
     public function show(string $id)
     {
         //
+        $habitacion = Habitacion::find($id);
+        return view('sistema.habitaciones.actualizar_foto', compact('habitacion'));
     }
 
     /**
@@ -142,5 +145,28 @@ class HabitacionController extends Controller
         $habitaciones = Habitacion::all();
         $pdf = Pdf::loadView('sistema.pdf.habitaciones', compact('habitaciones'));
         return $pdf->download('habitaciones.pdf');
+    }
+
+    public function updatePhoto(Request $request, string $id)
+    {
+        $request->validate([
+            'habitacion_imagen' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $habitacion = Habitacion::findOrFail($id);
+
+        if ($habitacion->url_foto) {
+            $rutaAnterior = str_replace('/storage/', '', $habitacion->url_foto);
+
+            if (Storage::disk('public')->exists($rutaAnterior)) {
+                Storage::disk('public')->delete($rutaAnterior);
+            }
+        }
+
+        $path = $request->file('habitacion_imagen')->store('imagenes', 'public');
+        $habitacion->url_foto = Storage::url($path);
+        $habitacion->save();
+
+        return back()->with('success', 'Foto actualizada correctamente.');
     }
 }

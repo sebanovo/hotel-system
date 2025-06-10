@@ -67,6 +67,8 @@ Route::middleware([
         Route::resource('/habitaciones', HabitacionController::class)->names('habitaciones');
         Route::get('/habitaciones/exportar/csv', [HabitacionController::class, 'csv'])->name('habitaciones.exportar.csv');
         Route::get('/habitaciones/exportar/pdf', [HabitacionController::class, 'pdf'])->name('habitaciones.exportar.pdf');
+
+        Route::put('/habitaciones/foto/{id}', [HabitacionController::class, 'updatePhoto'])->name('habitaciones.updatePhoto');
     }
 
     // reservas 

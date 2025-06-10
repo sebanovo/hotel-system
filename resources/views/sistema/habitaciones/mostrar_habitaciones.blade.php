@@ -56,6 +56,18 @@
                 @foreach ($habitaciones as $habitacion)
                     <tr>
                         <td>{{ $habitacion->nro }}</td>
+                         <td style="display:flex; justify-content: left; align-items: center;">
+                            @if (
+                                $habitacion->url_foto &&
+                                    Storage::disk('public')->exists(str_replace('/storage/', '', $habitacion->url_foto)))
+                                <img src="{{ $habitacion->url_foto }}" class="img-thumbnail mb-3"
+                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="Foto del habitacion">
+                            @else
+                                <img src="{{ asset('images/fallback.png') }}"
+                                    class="img-thumbnail rounded"
+                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="habitacion sin foto">
+                            @endif
+                        </td>
                         <td>{{ $habitacion->capacidad }}</td>
                         <td>{{ number_format($habitacion->precio, 2) }}</td>
                         <td>{{ $habitacion->piso->nombre }}</td>
@@ -78,8 +90,18 @@
                                     @method('PUT')
 
                                     <div class="column">
-                                        <img style="max-width: 300px; max-height: 300;"
-                                            src={{ asset('images/daniela.jpg') }} alt="daniela">
+                                        {{-- Mostrar la foto del habitacion --}}
+                                        @if ($habitacion->url_foto && Storage::disk('public')->exists(str_replace('/storage/', '', $habitacion->url_foto)))
+                                            <img src="{{ $habitacion->url_foto }}" class="img-thumbnail mb-3"
+                                                style="width: 150px; height: 150px; object-fit: cover;"
+                                                alt="Foto del habitacion">
+                                        @else
+                                            <img src="{{ asset('images/fallback.png') }}" class="img-thumbnail"
+                                                style="max-width: 300px; max-height: 300; object-fit: cover;"
+                                                alt="habitacion sin foto">
+                                        @endif
+
+
                                         <x-adminlte-input name="capacidad" label="Capacidad" placeholder="capacidad"
                                             value="{{ $habitacion->capacidad }}" fgroup-class="col-md-6"
                                             disable-feedback />
@@ -110,6 +132,9 @@
                                     </div>
                                     <x-adminlte-button type="submit" label="Actualizar" theme="primary"
                                         icon="fas fa-save" />
+                                    <a href="{{ route('habitaciones.show', $habitacion) }}">
+                                        <x-adminlte-button label="Actualizar foto" theme="success" icon="fas fa-image" />
+                                    </a>
                                 </form>
                             </x-adminlte-modal>
                             <form style="display : inline" action="{{ route('habitaciones.destroy', $habitacion) }}"
