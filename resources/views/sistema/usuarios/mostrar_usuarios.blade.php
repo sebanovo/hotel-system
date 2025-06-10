@@ -55,16 +55,16 @@
                     <tr>
                         <td>{{ $usuario->id }}</td>
                         <td style="display:flex; justify-content: left; align-items: center;">
-                            @if (
-                                $usuario->profile_photo_path &&
-                                    Storage::disk('public')->exists(str_replace('/storage/', '', $usuario->profile_photo_path)))
-                                <img src="{{ $usuario->profile_photo_path }}" class="img-thumbnail rounded-circle mb-3"
-                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="Foto del usuario">
-                            @else
-                                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                                    class="img-thumbnail rounded-circle"
-                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="Usuario sin foto">
-                            @endif
+                            @php
+                                $existeFoto =
+                                    $usuario->profile_photo_path &&
+                                    Storage::disk('public')->exists(
+                                        str_replace('/storage/', '', $usuario->profile_photo_path),
+                                    );
+                            @endphp
+                            <img src="{{ $existeFoto ? $usuario->profile_photo_path : asset('images/fallbacks/usuario-fallback.png') }}"
+                                class="img-thumbnail rounded-circle" style="width: 50; height: 50px; object-fit: cover;"
+                                alt="{{ $existeFoto ? 'Foto del usuairo' : 'Usuario sin foto' }}">
                         </td>
                         <td>{{ $usuario->name }}</td>
                         <td>{{ $usuario->email }}</td>
@@ -75,8 +75,8 @@
                                     <i class="fa fa-lg fa-fw fa-pen"></i>
                                 </button>
                             </a>
-                            <form style="display : inline" action="{{ route('usuarios.destroy', $usuario) }}" method="POST"
-                                class='form-eliminar'>
+                            <form style="display : inline" action="{{ route('usuarios.destroy', $usuario) }}"
+                                method="POST" class='form-eliminar'>
                                 @csrf
                                 @method('delete')
                                 {!! $btnDelete !!}

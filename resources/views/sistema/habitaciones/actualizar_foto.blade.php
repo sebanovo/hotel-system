@@ -7,13 +7,14 @@
 @stop
 
 @section('content')
-    @if ($habitacion->url_foto && Storage::disk('public')->exists(str_replace('/storage/', '', $habitacion->url_foto)))
-        <img src="{{ $habitacion->url_foto }}" class="img-thumbnail mb-3"
-            style="width: 150px; height: 150px; object-fit: cover;" alt="Foto del habitacion">
-    @else
-        <img src="{{ asset('images/fallback.png') }}" class="img-thumbnail"
-            style="max-width: 300px; max-height: 300; object-fit: cover;" alt="habitacion sin foto">
-    @endif
+    @php
+        $existeFoto =
+            $habitacion->url_foto &&
+            Storage::disk('public')->exists(str_replace('/storage/', '', $habitacion->url_foto));
+    @endphp
+    <img src="{{ $existeFoto ? $habitacion->url_foto : asset('images/fallbacks/habitacion-fallback.png') }}"
+        class="img-thumbnail" style="width: 400px; height: 400px; object-fit: cover;"
+        alt="{{ $existeFoto ? 'Foto de la habitacion' : 'Habitacion sin foto' }}">
 
     <form action="{{ route('habitaciones.updatePhoto', $habitacion->id) }}" method="POST" enctype="multipart/form-data"
         class="mt-3">

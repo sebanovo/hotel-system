@@ -10,17 +10,14 @@
     <div class="card">
 
         <div class="card-body text-center">
-            {{-- Mostrar la foto del usuario --}}
-            @if (
-                $usuario->profile_photo_path &&
-                    Storage::disk('public')->exists(str_replace('/storage/', '', $usuario->profile_photo_path)))
-                <img src="{{ $usuario->profile_photo_path }}" class="img-thumbnail rounded-circle mb-3"
-                    style="width: 150px; height: 150px; object-fit: cover;" alt="Foto del usuario">
-            @else
-                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                    class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;"
-                    alt="Usuario sin foto">
-            @endif
+            @php
+                $existeFoto =
+                    $usuario->profile_photo_path &&
+                    Storage::disk('public')->exists(str_replace('/storage/', '', $usuario->profile_photo_path));
+            @endphp
+            <img src="{{ $existeFoto ? $usuario->profile_photo_path : asset('images/fallbacks/usuario-fallback.png') }}"
+                class="img-thumbnail rounded-circle" style="width: 150px; height: 150px; object-fit: cover;"
+                alt="{{ $existeFoto ? 'Foto del usuairo' : 'Usuario sin foto' }}">
 
             <form action="{{ route('usuarios.updatePhoto', $usuario->id) }}" method="POST" enctype="multipart/form-data"
                 class="mt-3">

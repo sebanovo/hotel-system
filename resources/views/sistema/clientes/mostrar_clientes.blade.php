@@ -68,16 +68,16 @@
                     <tr>
                         <td>{{ $cliente->id }}</td>
                         <td style="display:flex; justify-content: left; align-items: center;">
-                            @if (
-                                $cliente->profile_photo_path &&
-                                    Storage::disk('public')->exists(str_replace('/storage/', '', $cliente->profile_photo_path)))
-                                <img src="{{ $cliente->profile_photo_path }}" class="img-thumbnail rounded-circle mb-3"
-                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="Foto del cliente">
-                            @else
-                                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-                                    class="img-thumbnail rounded-circle"
-                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="cliente sin foto">
-                            @endif
+                            @php
+                                $existeFoto =
+                                    $cliente->profile_photo_path &&
+                                    Storage::disk('public')->exists(
+                                        str_replace('/storage/', '', $cliente->profile_photo_path),
+                                    );
+                            @endphp
+                            <img src="{{ $existeFoto ? $cliente->profile_photo_path : asset('images/fallbacks/usuario-fallback.png') }}"
+                                class="img-thumbnail rounded-circle" style="width: 50; height: 50px; object-fit: cover;"
+                                alt="{{ $existeFoto ? 'Foto del usuairo' : 'Usuario sin foto' }}">
                         </td>
                         <td>{{ $cliente->name }}</td>
                         <td>{{ $cliente->email }}</td>
