@@ -39,6 +39,7 @@
         $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                   <i class="fa fa-lg fa-fw fa-trash"></i>
               </button>';
+
     @endphp
 
     <div class="card">
@@ -57,23 +58,42 @@
                 @foreach ($habitaciones as $habitacion)
                     <tr>
                         <td>{{ $habitacion->nro }}</td>
-                         <td style="display:flex; justify-content: left; align-items: center;">
-                            @if (
-                                $habitacion->url_foto &&
-                                    Storage::disk('public')->exists(str_replace('/storage/', '', $habitacion->url_foto)))
+                        <td style="display:flex; justify-content: left; align-items: center;">
+                            @if ($habitacion->url_foto && Storage::disk('public')->exists(str_replace('/storage/', '', $habitacion->url_foto)))
                                 <img src="{{ $habitacion->url_foto }}" class="img-thumbnail mb-3"
-                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="Foto del habitacion">
+                                    style="max-width: 100px; max-height: 50px; object-fit: cover;"
+                                    alt="Foto del habitacion">
                             @else
-                                <img src="{{ asset('images/fallback.png') }}"
-                                    class="img-thumbnail rounded"
-                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="habitacion sin foto">
+                                <img src="{{ asset('images/fallback.png') }}" class="img-thumbnail rounded"
+                                    style="max-width: 100px; max-height: 50px; object-fit: cover;"
+                                    alt="habitacion sin foto">
                             @endif
                         </td>
                         <td>{{ $habitacion->capacidad }}</td>
                         <td>{{ number_format($habitacion->precio, 2) }}</td>
                         <td>{{ $habitacion->piso->nombre }}</td>
                         <td>{{ $habitacion->tipo_habitacion->nombre }}</td>
-                        <td>{{ $habitacion->estado->nombre }}</td>
+                        @php
+                            switch ($habitacion->estado->nombre) {
+                                case 'disponible':
+                                    $color = 'success'; // verde
+                                    break;
+                                case 'reservado':
+                                    $color = 'warning'; // amarillo
+                                    break;
+                                case 'no disponible':
+                                    $color = 'danger'; // rojo
+                                    break;
+                                case 'en mantenimiento':
+                                    $color = 'info'; // celeste
+                                    break;
+                                default:
+                                    $color = 'secondary'; // gris
+                            }
+                        @endphp
+                        <td>
+                            <span class="badge bg-{{ $color }}">{{ ucfirst($habitacion->estado->nombre) }}</span>
+                        </td>
                         <td>
                             {{ $habitacion->detalle_habitacion->map(function ($detalle) {
                                     return str_replace(' ', '', $detalle->articulos->nombre);

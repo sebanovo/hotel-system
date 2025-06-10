@@ -56,7 +56,27 @@
                         <td>{{ $reserva->id }}</td>
                         <td>{{ $reserva->fecha_inicio }}</td>
                         <td>{{ $reserva->fecha_salida }}</td>
-                        <td>{{ $reserva->estado->nombre }}</td>
+                          @php
+                            switch ($reserva->estado->nombre) {
+                                case 'disponible':
+                                    $color = 'success'; // verde
+                                    break;
+                                case 'reservado':
+                                    $color = 'warning'; // amarillo
+                                    break;
+                                case 'no disponible':
+                                    $color = 'danger'; // rojo
+                                    break;
+                                case 'en mantenimiento':
+                                    $color = 'info'; // celeste
+                                    break;
+                                default:
+                                    $color = 'secondary'; // gris
+                            }
+                        @endphp
+                        <td>
+                            <span class="badge bg-{{ $color }}">{{ ucfirst($reserva->estado->nombre) }}</span>
+                        </td>
                         <td>{{ $reserva->cliente_users->name }}</td>
                         <td>
                             <x-adminlte-button label="" theme="primary" icon="fa fa-lg fa-fw fa-pen"
