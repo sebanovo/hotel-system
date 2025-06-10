@@ -8,7 +8,7 @@
 
 @section('content')
     @php
-        $heads = ['ID', 'Nombre', 'Correo', ['label' => 'Acciones', 'no-export' => true, 'width' => 15]];
+        $heads = ['ID', 'Foto', 'Nombre', 'Correo', ['label' => 'Acciones', 'no-export' => true, 'width' => 15]];
 
         $btnDelete = '<button type="submit" class="btn btn-xs btn-default text-danger mx-1 shadow" title="Delete">
                   <i class="fa fa-lg fa-fw fa-trash"></i>
@@ -67,6 +67,18 @@
                 @foreach ($clientes as $cliente)
                     <tr>
                         <td>{{ $cliente->id }}</td>
+                        <td style="display:flex; justify-content: left; align-items: center;">
+                            @if (
+                                $cliente->profile_photo_path &&
+                                    Storage::disk('public')->exists(str_replace('/storage/', '', $cliente->profile_photo_path)))
+                                <img src="{{ $cliente->profile_photo_path }}" class="img-thumbnail rounded-circle mb-3"
+                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="Foto del cliente">
+                            @else
+                                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+                                    class="img-thumbnail rounded-circle"
+                                    style="max-width: 100px; max-height: 50px; object-fit: cover;" alt="cliente sin foto">
+                            @endif
+                        </td>
                         <td>{{ $cliente->name }}</td>
                         <td>{{ $cliente->email }}</td>
                         <td>
@@ -80,13 +92,6 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
-                                        {{-- <x-adminlte-input name="name" label="Nombre" placeholder="nombre cliente"
-                                            fgroup-class="col-md-6" disable-feedback />
-                                        <x-adminlte-input name="email" label="Correo" placeholder="correo@example.com"
-                                            fgroup-class="col-md-6" disable-feedback />
-                                        <x-adminlte-input name="password" label="Contraseña" placeholder="contraseña"
-                                            fgroup-class="col-md-6" disable-feedback /> --}}
-
                                         <x-adminlte-input name="name" label="Nombre" value="{{ $cliente->name }}"
                                             fgroup-class="col-md-6" disable-feedback />
                                         <x-adminlte-input name="email" label="Correo" fgroup-class="col-md-6"
