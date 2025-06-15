@@ -26,8 +26,8 @@
         ];
         $heads = [
             '#',
-            'Capacidad',
             'Foto',
+            'Capacidad',
             'Precio (Bs)',
             'Piso',
             'Tipo',
