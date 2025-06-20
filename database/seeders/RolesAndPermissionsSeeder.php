@@ -17,6 +17,14 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
+        $paquetes = [
+            'Gestionar paquete usuarios', // Gestionar usuarios
+            'Gestionar paquete habitaciones', // Gestionar habitaciones
+            'Gestionar paquete reservas', // Gestionar reservas
+            'Gestionar paquete pagos', // Gestionar pagos
+            'Gestionar paquete clientes', // Gestionar clientes
+        ];
+
         $compartido = [
             'Gestionar perfil', // Gestionar perfil
             'Ver perfil',
@@ -77,7 +85,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'Crear clientes',
             'Leer clientes',
             'Actualizar clientes',
-            'Eliminar clientes'
+            'Eliminar clientes',
+
+            ...$paquetes
         ];
 
         foreach ($permissions as $permission) {
@@ -86,7 +96,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $roles = [
             'Administrador' => [
-                ...$permissions // spread operator
+                ...$permissions, // spread operator
+                ...$paquetes
             ],
             'Recepcionista' => [
                 'Gestionar habitaciones', // Gestionar habitaciones
@@ -119,7 +130,11 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Actualizar clientes',
                 'Eliminar clientes',
 
-                ...$compartido
+                ...$compartido,
+                $paquetes[1],
+                $paquetes[2],
+                $paquetes[3],
+                $paquetes[4],
             ],
             'Cliente' => [
                 ...$compartido

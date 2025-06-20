@@ -325,7 +325,7 @@ return [
         [
             'text' => 'Gestionar usuarios',
             'icon' => 'fas fa-fw fa-users',
-            'can' => ['Gestionar usuarios', 'Administrar roles y permisos', 'Administrar roles y permisos'],
+            'can' => 'Gestionar paquete usuarios',
             'submenu' => [
                 [
                     'text' => 'Usuarios',
@@ -356,7 +356,7 @@ return [
         [
             'text' => 'Gestionar habitacion',
             'icon' => 'fas fa-fw fa-bed',
-            'can' => ['Gestionar habitaciones'],
+            'can' => 'Gestionar paquete habitaciones',
             'submenu' => [
                 [
                     'text' => 'Habitaciones',
@@ -369,7 +369,7 @@ return [
         [
             'text' => 'Gestionar reservas',
             'icon' => 'fas fa-fw fa-calendar-alt',
-            'can' => ['Gestionar reservas', 'Gestionar servicios'],
+            'can' => 'Gestionar paquete reservas',
             'submenu' => [
                 [
                     'text' => 'Reservas',
@@ -388,7 +388,7 @@ return [
         [
             'text' => 'Gestionar pagos',
             'icon' => 'fas fa-fw fa-credit-card',
-            'can' => ['Gestionar tipo pagos'],
+            'can' => 'Gestionar paquete pagos',
             'submenu' => [
                 [
                     'text' => 'Tipo Pagos',
@@ -401,7 +401,7 @@ return [
         [
             'text' => 'Gestionar clientes',
             'icon' => 'fas fa-fw fa-users',
-            'can' => 'Gestionar clientes',
+            'can' => 'Gestionar paquete clientes',
             'submenu' => [
                 [
                     'text' => 'Clientes',
