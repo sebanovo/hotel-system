@@ -4,6 +4,7 @@ use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HabitacionController;
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RoleController;
@@ -32,10 +33,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('sistema.dashboard');
-    })->name('dashboard');;
-
+    Route::get('/dashboard', [PanelController::class, 'index'])->name('dashboard');
     //  roles
     {
         Route::resource('/roles', RoleController::class)->names('roles');
@@ -69,6 +67,7 @@ Route::middleware([
         Route::get('/habitaciones/exportar/pdf', [HabitacionController::class, 'pdf'])->name('habitaciones.exportar.pdf');
 
         Route::put('/habitaciones/foto/{id}', [HabitacionController::class, 'updatePhoto'])->name('habitaciones.updatePhoto');
+        Route::get('/habitaciones/reservar/{id}', [HabitacionController::class, 'showHabitacion'])->name('showHabitacion');
     }
 
     // reservas 
@@ -76,6 +75,8 @@ Route::middleware([
         Route::resource('/reservas', ReservaController::class)->names('reservas');
         Route::get('/reservas/exportar/csv', [ReservaController::class, 'csv'])->name('reservas.exportar.csv');
         Route::get('/reservas/exportar/pdf', [ReservaController::class, 'pdf'])->name('reservas.exportar.pdf');
+
+        Route::post('/reservas/reservar-habitacion/', [ReservaController::class, 'reservarHabitacion'])->name('reservarHabitacion');
     }
 
     // servicios

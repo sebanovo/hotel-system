@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tipo_pago_id');
             $table->unsignedBigInteger('reserva_id')->nullable();
             $table->unsignedBigInteger('user_cliente_id');
-            $table->unsignedBigInteger('user_empleado_id');
+            $table->unsignedBigInteger('user_empleado_id')->nullable();
 
 
             $table->foreign('tipo_pago_id')->references('id')->on('tipo_pagos')->onDelete('cascade')->onUpdate('cascade');

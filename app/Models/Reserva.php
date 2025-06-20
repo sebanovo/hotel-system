@@ -12,10 +12,10 @@ class Reserva extends Model
     protected $table = 'reservas';
 
     protected $fillable = [
-       'fecha_inicio',
-       'fecha_salida',
-       'estado_id',
-       'user_cliente_id',
+        'fecha_inicio',
+        'fecha_salida',
+        'estado_id',
+        'user_cliente_id',
     ];
 
     public function estado()
@@ -36,5 +36,15 @@ class Reserva extends Model
     public function detalle_reservas()
     {
         return $this->hasMany(DetalleReserva::class, 'reserva_id');
+    }
+    public function habitaciones()
+    {
+        return $this->belongsToMany(Habitacion::class, 'detalle_reservas')
+            ->withPivot('precio_v', 'cantidad')
+            ->withTimestamps();
+    }
+    public function cliente()
+    {
+        return $this->belongsTo(User::class, 'user_cliente_id');
     }
 }

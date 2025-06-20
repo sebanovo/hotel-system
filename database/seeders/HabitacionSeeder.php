@@ -15,7 +15,7 @@ class HabitacionSeeder extends Seeder
     {
         Habitacion::create([
             'id' => 1,
-            'nro'=> 1,
+            'nro' => 1,
             'capacidad' => 2,
             'precio' => 100.00,
             'url_foto' => null,
@@ -25,33 +25,55 @@ class HabitacionSeeder extends Seeder
         ]);
         Habitacion::create([
             'id' => 2,
-            'nro'=> 2,
+            'nro' => 2,
             'capacidad' => 3,
             'precio' => 150.00,
             'url_foto' => null,
             'piso_id' => 1,
             'tipo_habitacion_id' => 2,
-            'estado_id' => 2,
+            'estado_id' => 1,
         ]);
         Habitacion::create([
             'id' => 3,
-            'nro'=> 3,
+            'nro' => 3,
             'capacidad' => 4,
             'precio' => 200.00,
             'url_foto' => null,
             'piso_id' => 2,
             'tipo_habitacion_id' => 1,
-            'estado_id' => 3,
+            'estado_id' => 1,
         ]);
         Habitacion::create([
             'id' => 4,
-            'nro'=> 4,
+            'nro' => 4,
             'capacidad' => 5,
             'precio' => 250.00,
             'url_foto' => null,
-            'piso_id' => 2,
+            'piso_id' => 3,
             'tipo_habitacion_id' => 2,
             'estado_id' => 1,
+        ]);
+
+        Habitacion::create([
+            'id' => 5,
+            'nro' => 5,
+            'capacidad' => 5,
+            'precio' => 250.00,
+            'url_foto' => null,
+            'piso_id' => 3,
+            'tipo_habitacion_id' => 2,
+            'estado_id' => 4,
+        ]);
+
+        Habitacion::create([
+            'id' => 6,
+            'nro' => 6,
+            'capacidad' => 5,
+            'precio' => 250.00,
+            'url_foto' => null,
+            'piso_id' => 3,
+            'tipo_habitacion_id' => 2,
+            'estado_id' => 4,
         ]);
     }
 }

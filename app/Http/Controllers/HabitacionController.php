@@ -10,6 +10,7 @@ use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class HabitacionController extends Controller
@@ -168,5 +169,16 @@ class HabitacionController extends Controller
         $habitacion->save();
 
         return back()->with('success', 'Foto actualizada correctamente.');
+    }
+
+    public function showHabitacion(string $id)
+    {
+        $habitacion = Habitacion::find($id);
+        if (!$habitacion) {
+            return redirect()->route('habitaciones.index')->with('error', 'Habitación no encontrada.');
+        }
+
+        $cliente = Auth::user();
+        return view('sistema.reservas.reservar_habitacion', compact('habitacion', 'cliente'));
     }
 }
