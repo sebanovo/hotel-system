@@ -20,7 +20,7 @@ class NotaVentaSeeder extends Seeder
             'tipo_pago_id' => 1,
             'reserva_id' => 1,
             'user_cliente_id' => 1,
-            'user_empleado_id' => 1,
+            'user_empleado_id' => null,
         ]);
         NotaVenta::create([
             'id' => 2,
@@ -29,7 +29,7 @@ class NotaVentaSeeder extends Seeder
             'tipo_pago_id' => 2,
             'reserva_id' => 2,
             'user_cliente_id' => 2,
-            'user_empleado_id' => 1,
+            'user_empleado_id' => null,
         ]);
         NotaVenta::create([
             'id' => 3,
@@ -38,7 +38,7 @@ class NotaVentaSeeder extends Seeder
             'tipo_pago_id' => 1,
             'reserva_id' => 3,
             'user_cliente_id' => 3,
-            'user_empleado_id' => 2,
+            'user_empleado_id' => null,
         ]);
         NotaVenta::create([
             'id' => 4,
@@ -47,7 +47,7 @@ class NotaVentaSeeder extends Seeder
             'tipo_pago_id' => 2,
             'reserva_id' => 1,
             'user_cliente_id' => 1,
-            'user_empleado_id' => 2,
+            'user_empleado_id' => null,
         ]);
     }
 }
