@@ -21,6 +21,9 @@ class ReservaController extends Controller
         $this->middleware('can:Gestionar reservas')->only(
             ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
         );
+        $this->middleware('can:Reservar Habitacion')->only(
+            ['reservarHabitacion']
+        );
     }
     /**
      * Display a listing of the resource.

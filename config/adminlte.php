@@ -401,6 +401,12 @@ return [
                     'route' => 'tipo_pagos.index',
                     'icon' => 'fas fa-money-bill-alt',
                     'can' => 'Gestionar tipo pagos'
+                ],
+                [
+                    'text' => 'Nota Ventas',
+                    'route' => 'notaventas.index',
+                    'icon' => 'fas fa-file-invoice-dollar',
+                    'can' => 'Gestionar nota ventas'
                 ]
             ],
         ],

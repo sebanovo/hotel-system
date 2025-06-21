@@ -88,6 +88,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'Actualizar clientes',
             'Eliminar clientes',
 
+            'Gestionar nota ventas', // Gestionar nota ventas
+            'Crear nota ventas',
+            'Leer nota ventas',
+            'Actualizar nota ventas',
+            'Eliminar nota ventas',
+
             ...$paquetes
         ];
 
@@ -130,6 +136,12 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Leer clientes',
                 'Actualizar clientes',
                 'Eliminar clientes',
+
+                'Gestionar nota ventas', // Gestionar nota ventas
+                'Crear nota ventas',
+                'Leer nota ventas',
+                'Actualizar nota ventas',
+                'Eliminar nota ventas',
 
                 ...$compartido,
                 $paquetes[1],

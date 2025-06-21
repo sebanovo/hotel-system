@@ -25,7 +25,7 @@ class NotaVenta extends Model
         return $this->belongsTo(TipoPago::class, 'tipo_pago_id');
     }
 
-    public function cliente_users()
+    public function cliente()
     {
         return $this->belongsTo(User::class, 'user_cliente_id');
     }

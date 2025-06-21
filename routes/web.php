@@ -4,6 +4,7 @@ use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HabitacionController;
+use App\Http\Controllers\NotaVentaController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\ReporteController;
@@ -92,6 +93,13 @@ Route::middleware([
         Route::get('/servicios/exportar/pdf', [ServicioController::class, 'pdf'])->name('servicios.exportar.pdf');
     }
 
+    // nota venta
+    {
+        Route::resource('/notaventa', NotaVentaController::class)->names('notaventas');
+        Route::get('/notaventa/exportar/csv', [NotaVentaController::class, 'csv'])->name('notaventas.exportar.csv');
+        Route::get('/notaventa/exportar/pdf', [NotaVentaController::class, 'pdf'])->name('notaventas.exportar.pdf');
+    }
+
     // tipo pago 
     {
         Route::resource('/tipo_pago', TipoPagoController::class)->names('tipo_pagos');
@@ -106,7 +114,7 @@ Route::middleware([
         Route::get('/bitacora/exportar/pdf', [BitacoraController::class, 'pdf'])->name('bitacora.exportar.pdf');
     }
 
-    // bitacora
+    // clientes
     {
         Route::resource('/clientes', ClienteController::class)->names('clientes');
         Route::get('/clientes/exportar/csv', [ClienteController::class, 'csv'])->name('clientes.exportar.csv');
@@ -118,6 +126,7 @@ Route::middleware([
         Route::resource('/reportes', ReporteController::class)->names('reportes');
         Route::get('/reportes/reservas/exportar', [ReporteController::class, 'reservasExportar'])->name('reportes.reservas.exportar');
         Route::get('/reportes/habitaciones/exportar', [ReporteController::class, 'habitacionesExportar'])->name('reportes.habitaciones.exportar');
+        Route::get('/reportes/notaventas/exportar', [ReporteController::class, 'notaVentasExportar'])->name('reportes.notaventas.exportar');
     }
     Route::resource('/asignar', AsignarController::class)->names('asignar');
 });

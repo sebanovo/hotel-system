@@ -39,8 +39,6 @@
     <br>
     <br>
     <br>
-
-
     <h4>Habitaciones</h4>
     <form action="{{ route('reportes.habitaciones.exportar') }}" method="GET" class="row g-3">
         <div class="col-md-4">
@@ -50,6 +48,31 @@
             <x-adminlte-select name="estado" label="Estado" igroup-size="sm">
                 <x-adminlte-options :options="$estados_reservas" value="{{ 1 }}" required />
             </x-adminlte-select>
+            <button type="submit" name="formato" value="csv" class="btn btn-success">
+                <i class="fas fa-file-csv"></i> Descargar CSV
+            </button>
+
+            <button type="submit" name="formato" value="pdf" class="btn btn-danger">
+                <i class="fas fa-file-pdf"></i> Descargar PDF
+            </button>
+        </div>
+    </form>
+    <br>
+    <br>
+    <br>
+    <h4>Ventas</h4>
+    <form action="{{ route('reportes.notaventas.exportar') }}" method="GET" class="row g-3">
+        <div class="col-md-4">
+            <label for="fecha_inicio" class="form-label">Fecha Inicial</label>
+            <input type="date" name="fecha_inicio" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
+            <label for="fecha_fin" class="form-label">Fecha Final</label>
+            <input type="date" name="fecha_fin" class="form-control" required>
+        </div>
+
+        <div class="col-md-4">
             <button type="submit" name="formato" value="csv" class="btn btn-success">
                 <i class="fas fa-file-csv"></i> Descargar CSV
             </button>

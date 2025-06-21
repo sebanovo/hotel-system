@@ -15,7 +15,7 @@ class NotaVentaSeeder extends Seeder
     {
         NotaVenta::create([
             'id' => 1,
-            'fecha' => '2023-10-01',
+            'fecha' => '2025-6-21',
             'monto_total' => 100.00,
             'tipo_pago_id' => 1,
             'reserva_id' => 1,
