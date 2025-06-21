@@ -383,6 +383,12 @@ return [
                     'icon' => 'fas fa-fw fa-concierge-bell',
                     'can' => 'Gestionar servicios'
                 ],
+                [
+                    'text' => 'Reportes',
+                    'route' => 'reportes.index',
+                    'icon' => 'fas fa-fw fa-file-alt',
+                    'can' => ['Gestionar reservas', 'Gestionar servicios']
+                ],
             ],
         ],
         [

@@ -13,32 +13,42 @@ class DetalleHabitacionSeeder extends Seeder
      */
     public function run(): void
     {
-        DetalleHabitacion::create([
-            'id' => 1,
-            'habitacion_id' => 1,
-            'articulo_id' => 1,
-
-        ]);
-
-        DetalleHabitacion::create([
-            'id' => 2,
-            'habitacion_id' => 2,
-            'articulo_id' => 2,
-
-        ]);
-
-        DetalleHabitacion::create([
-            'id' => 3,
-            'habitacion_id' => 3,
-            'articulo_id' => 3,
-
-        ]);
-
-        DetalleHabitacion::create([
-            'id' => 4,
-            'habitacion_id' => 1,
-            'articulo_id' => 4,
-
-        ]);
+        // meter más artículos en las habitaciones
+        foreach (range(1, 3) as $i) {
+            DetalleHabitacion::create([
+                'habitacion_id' => 1,
+                'articulo_id' => $i,
+            ]);
+        }
+        foreach (range(1, 6) as $i) {
+            DetalleHabitacion::create([
+                'habitacion_id' => 2,
+                'articulo_id' => $i,
+            ]);
+        }
+        foreach (range(3, 6) as $i) {
+            DetalleHabitacion::create([
+                'habitacion_id' => 3,
+                'articulo_id' => $i,
+            ]);
+        }
+        foreach (range(1, 2) as $i) {
+            DetalleHabitacion::create([
+                'habitacion_id' => 4,
+                'articulo_id' => $i,
+            ]);
+        }
+        foreach (range(4, 6) as $i) {
+            DetalleHabitacion::create([
+                'habitacion_id' => 5,
+                'articulo_id' => $i,
+            ]);
+        }
+        foreach (range(1, 6) as $i) {
+            DetalleHabitacion::create([
+                'habitacion_id' => 6,
+                'articulo_id' => $i,
+            ]);
+        }
     }
 }

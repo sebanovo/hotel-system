@@ -13,26 +13,26 @@ class ReservaSeeder extends Seeder
      */
     public function run(): void
     {
-        // Reserva::create([
-        //     'id' => 1,
-        //     'fecha_inicio' => '2022-01-01',
-        //     'fecha_salida' => '2022-01-02',
-        //     'estado_id' => 1,
-        //     'user_cliente_id' => 1,
-        // ]);
-        // Reserva::create([
-        //     'id' => 2,
-        //     'fecha_inicio' => '2022-01-02',
-        //     'fecha_salida' => '2022-01-03',
-        //     'estado_id' => 1,
-        //     'user_cliente_id' => 2,
-        // ]);
-        // Reserva::create([
-        //     'id' => 3,
-        //     'fecha_inicio' => '2022-01-03',
-        //     'fecha_salida' => '2022-01-04',
-        //     'estado_id' => 1,
-        //     'user_cliente_id' => 1,
-        // ]);
+        Reserva::create([
+            'id' => 1,
+            'fecha_inicio' => '2025-6-21',
+            'fecha_salida' => '2025-6-22',
+            'estado_id' => 1,
+            'user_cliente_id' => 4,
+        ]);
+        Reserva::create([
+            'id' => 2,
+            'fecha_inicio' => '2025-6-21',
+            'fecha_salida' => '2025-6-22',
+            'estado_id' => 1,
+            'user_cliente_id' => 5,
+        ]);
+        Reserva::create([
+            'id' => 3,
+            'fecha_inicio' => '2025-6-21',
+            'fecha_salida' => '2025-6-22',
+            'estado_id' => 1,
+            'user_cliente_id' => 6,
+        ]);
     }
 }

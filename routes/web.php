@@ -6,11 +6,13 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoPagoController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/link', function () {
+    Artisan::call('storage:link');
 });
 
 Route::middleware([
@@ -105,6 +111,13 @@ Route::middleware([
         Route::resource('/clientes', ClienteController::class)->names('clientes');
         Route::get('/clientes/exportar/csv', [ClienteController::class, 'csv'])->name('clientes.exportar.csv');
         Route::get('/clientes/exportar/pdf', [ClienteController::class, 'pdf'])->name('clientes.exportar.pdf');
+    }
+
+    // reporte
+    {
+        Route::resource('/reportes', ReporteController::class)->names('reportes');
+        Route::get('/reportes/reservas/exportar', [ReporteController::class, 'reservasExportar'])->name('reportes.reservas.exportar');
+        Route::get('/reportes/habitaciones/exportar', [ReporteController::class, 'habitacionesExportar'])->name('reportes.habitaciones.exportar');
     }
     Route::resource('/asignar', AsignarController::class)->names('asignar');
 });

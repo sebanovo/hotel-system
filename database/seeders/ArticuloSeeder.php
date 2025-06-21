@@ -14,8 +14,8 @@ class ArticuloSeeder extends Seeder
     public function run(): void
     {
         Articulo::create([
-           'id' => 1,
-           'nombre' => 'Televisior',
+            'id' => 1,
+            'nombre' => 'Televisior',
         ]);
 
         Articulo::create([
@@ -37,17 +37,10 @@ class ArticuloSeeder extends Seeder
             'id' => 5,
             'nombre' => 'Escritorio',
         ]);
+        
         Articulo::create([
             'id' => 6,
             'nombre' => 'Ventilador',
         ]);
-        
-
-
-        // EstadoEjecucion::create([
-        //     'id' => 1,
-        //     'nombre' => 'En Proceso',
-        //     'descripcion' => 'Cuando se sigue trabajando en el examen.',
-        // ]);
     }
 }
