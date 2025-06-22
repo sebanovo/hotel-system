@@ -44,6 +44,9 @@
                                 case 'en mantenimiento':
                                     $color = 'info'; // celeste
                                     break;
+                                case 'finalizado':
+                                    $color = 'dark'; // gris oscuro
+                                    break;
                                 default:
                                     $color = 'secondary'; // gris
                             }

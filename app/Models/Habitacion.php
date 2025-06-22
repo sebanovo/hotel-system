@@ -50,4 +50,16 @@ class Habitacion extends Model
     {
         return $this->hasMany(DetalleReserva::class, 'habitacion_id');
     }
+
+    public function reservas()
+    {
+        return $this->belongsToMany(Reserva::class, 'detalle_reservas')
+            ->withPivot('precio', 'cantidad')
+            ->withTimestamps();
+    }
+
+    public function reservado()
+    {
+        return $this->hasOne(Reserva::class)->where('estado', 'reservado');
+    }
 }

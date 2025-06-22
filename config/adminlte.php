@@ -384,6 +384,18 @@ return [
                     'can' => 'Gestionar reservas'
                 ],
                 [
+                    'text' => 'Entradas',
+                    'route' => 'entradas.index',
+                    'icon' => 'fas fa-fw fa-sign-in-alt',
+                    'can' => 'Gestionar entradas'
+                ],
+                [
+                    'text' => 'Salidas',
+                    'route' => 'salidas.index',
+                    'icon' => 'fas fa-fw fa-sign-out-alt',
+                    'can' => 'Gestionar salidas'
+                ],
+                [
                     'text' => 'Servicios',
                     'route' => 'servicios.index',
                     'icon' => 'fas fa-fw fa-concierge-bell',

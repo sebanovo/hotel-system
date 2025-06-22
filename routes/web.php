@@ -3,6 +3,7 @@
 use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\NotaVentaController;
 use App\Http\Controllers\PanelController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\PisoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SalidaController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\TipoPagoController;
 use App\Http\Controllers\UserController;
@@ -140,6 +142,16 @@ Route::middleware([
         Route::get('/reportes/reservas/exportar', [ReporteController::class, 'reservasExportar'])->name('reportes.reservas.exportar');
         Route::get('/reportes/habitaciones/exportar', [ReporteController::class, 'habitacionesExportar'])->name('reportes.habitaciones.exportar');
         Route::get('/reportes/notaventas/exportar', [ReporteController::class, 'notaVentasExportar'])->name('reportes.notaventas.exportar');
+    }
+
+    // Entrada y salidasAdd commentMore actions
+    {
+        // Entrada
+        Route::resource('/entradas', EntradaController::class)->names('entradas');
+        Route::get('/entradas/checkin/{habitacion}', [EntradaController::class, 'checkin'])->name('entradas.checkin');
+        // salida
+        Route::resource('/salidas', SalidaController::class)->names('salidas');
+        Route::get('/salidas/{habitacion}/checkout', [SalidaController::class, 'checkout'])->name('salidas.checkout');
     }
     Route::resource('/asignar', AsignarController::class)->names('asignar');
 });

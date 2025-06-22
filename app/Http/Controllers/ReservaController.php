@@ -8,6 +8,7 @@ use App\Models\Habitacion;
 use App\Models\NotaVenta;
 use App\Models\Reserva;
 use App\Models\TipoPago;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -49,6 +50,7 @@ class ReservaController extends Controller
     public function store(Request $request)
     {
         //
+        //
         $request->validate([
             'cliente_id' => 'required|exists:users,id',
             'habitacion_id' => 'required|exists:habitacions,id',
@@ -56,7 +58,24 @@ class ReservaController extends Controller
             'fecha_salida' => 'required|date|after:fecha_inicio',
         ]);
 
+        $estaReservado = DetalleReserva::where('habitacion_id', $request->habitacion_id)
+            ->whereHas('reservas', function ($query) use ($request) {
+                $query->where('estado_id', Estado::where('nombre', 'reservado')->first()->id)
+                    ->where(function ($query) use ($request) {
+                        $query->whereBetween('fecha_inicio', [$request->fecha_inicio, $request->fecha_salida])
+                            ->orWhereBetween('fecha_salida', [$request->fecha_inicio, $request->fecha_salida]);
+                    });
+            })->exists();
+
+        if ($estaReservado) {
+            return redirect()->back()->with('error', 'La habitación ya está reservada en las fechas seleccionadas.');
+        }
+
         $habitacion = Habitacion::findOrFail($request->habitacion_id);
+        // Verificar si la habitación está disponible
+        if ($habitacion->estado_id != Estado::where('nombre', 'disponible')->first()->id) {
+            return redirect()->back()->with('error', 'La habitación no está disponible para reservar.');
+        }
 
         // Calcular la cantidad de noches
         $fechaInicio = Carbon::parse($request->fecha_inicio);
@@ -67,26 +86,26 @@ class ReservaController extends Controller
         $precioPorNoche = $habitacion->precio;
         $montoTotal = $precioPorNoche * $cantidadNoches;
 
-        // Crear reserva
+        $cliente = User::findOrFail($request->cliente_id);
         $reserva = Reserva::create([
-            'user_cliente_id' => $request->cliente_id,
+            'user_cliente_id' => $cliente->id,
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_salida' => $request->fecha_salida,
             'estado_id' => Estado::where('nombre', 'reservado')->first()->id,
         ]);
 
-        // Asociar habitación a reserva a través de la tabla intermedia
         $reserva->habitaciones()->attach($habitacion->id, [
             'precio_v' => $precioPorNoche,
             'cantidad' => $cantidadNoches,
         ]);
 
-        // Opcional: cambiar el estado de la habitación
-        $estadoReservado = Estado::where('nombre', 'reservado')->first();
-        if ($estadoReservado) {
-            $habitacion->estado_id = $estadoReservado->id;
-            $habitacion->save();
-        }
+        NotaVenta::create([
+            'reserva_id' => $reserva->id,
+            'monto_total' => $montoTotal,
+            'user_cliente_id' => $cliente->id,
+            'fecha' => Carbon::now(),
+            'tipo_pago_id' => 1 // efectivo
+        ]);
 
         return redirect()->route('entradas.index')->with('success', 'Reserva creada correctamente.');
     }

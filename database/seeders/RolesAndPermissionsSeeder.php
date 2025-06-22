@@ -101,6 +101,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'Actualizar pisos',
             'Eliminar pisos',
 
+            'Gestionar entradas',  // Gestionar entradas (check-in)
+            'Gestionar salidas', // Gestionar salidas (check-out)
+
             ...$paquetes
         ];
 
@@ -149,6 +152,9 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Leer nota ventas',
                 'Actualizar nota ventas',
                 'Eliminar nota ventas',
+
+                'Gestionar entradas',  // Gestionar entradas (check-in)
+                'Gestionar salidas', // Gestionar salidas (check-out)
 
                 ...$compartido,
                 $paquetes[1],

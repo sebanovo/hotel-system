@@ -33,5 +33,10 @@ class EstadoSeeder extends Seeder
             'nombre' => 'en mantenimiento',
             'descripcion' => 'El piso está en mantenimiento y no puede ser reservado',
         ]);
+        Estado::create([
+            'id' => 5,
+            'nombre' => 'finalizado',
+            'descripcion' => 'La reserva ha finalizado y el cliente ha salido del piso (solo para reservas)',
+        ]);
     }
 }
