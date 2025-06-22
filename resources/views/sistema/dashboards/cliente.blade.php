@@ -1,12 +1,18 @@
 @extends('adminlte::page')
 
-@section('title', 'Catálogo de Habitaciones')
+@section('title', 'Catálogo de Habitaciones y Servicios')
 
 @section('content_header')
-    <h1 class="text-primary"><i class="fas fa-hotel"></i> Catálogo de Habitaciones</h1>
+    <h1 class="text-primary"><i class="fas fa-hotel"></i>Catálogo de Habitaciones</h1>
 @stop
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="row">
         @forelse($habitaciones as $habitacion)
             @if ($habitacion->estado->nombre != 'disponible')
@@ -49,16 +55,18 @@
                     </div>
 
                     <div class="card-body">
-                        <h5 class="card-title">Habitación #{{ $habitacion->nro }}</h5>
+                        <h5 class="card-title"><strong>Habitación</strong> #{{ $habitacion->nro }}</h5>
                         <p class="card-text">
-                            <strong>{{ $habitacion->piso->nombre ?? 'N/A' }}</strong><br>
-                            <strong>Precio:</strong> {{ number_format($habitacion->precio, 2) }} Bs (noche)
-                            <br>
-                            <strong>Articulos:</strong>
-                            {{ $habitacion->detalle_habitacion->map(function ($detalle) {
-                                    return str_replace(' ', '', $detalle->articulos->nombre);
-                                })->implode(', ') }}
-                            <br>
+                        <p><strong>Piso: </strong>{{ $habitacion->piso->id ?? 'N/A' }}</p>
+                        <strong>Precio:</strong> {{ number_format($habitacion->precio, 2) }} Bs (noche)
+                        <br>
+                        <strong>Capacidad:</strong> {{ $habitacion->capacidad }} personas
+                        <br>
+                        <strong>Articulos:</strong>
+                        {{ $habitacion->detalle_habitacion->map(function ($detalle) {
+                                return str_replace(' ', '', $detalle->articulos->nombre);
+                            })->implode(', ') }}
+                        <br>
                         </p>
                     </div>
                     <div class="p-3">
@@ -74,6 +82,32 @@
             <div class="col-12">
                 <div class="alert alert-warning text-center">
                     <i class="fas fa-exclamation-circle"></i> No hay habitaciones disponibles.
+                </div>
+            </div>
+        @endforelse
+    </div>
+    <h3 class="text-primary"><i class="fas fa-fw fa-concierge-bell"></i>Catálogo Servicios</h3>
+    <div class="row">
+        @forelse($servicios as $servicio)
+            <div class="col-md-4 mb-4">
+                <div class="card border-primary shadow h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>{{ $servicio->nombre }}</strong></h5>
+                        <p class="card-text">
+                            <strong>Descripción:</strong> {{ $servicio->descripcion }}<br>
+                            <strong>Precio:</strong> {{ number_format($servicio->precio, 2) }} Bs
+                        </p>
+                        <a href="{{ route('showServicio', $servicio) }}">
+                            <x-adminlte-button class="float-right" type="submit" theme="primary"
+                                label="Solicitar Servicio" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    <i class="fas fa-exclamation-circle"></i> No hay servicios disponibles.
                 </div>
             </div>
         @endforelse

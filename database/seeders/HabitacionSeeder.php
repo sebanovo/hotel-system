@@ -53,7 +53,6 @@ class HabitacionSeeder extends Seeder
             'tipo_habitacion_id' => 2,
             'estado_id' => 1,
         ]);
-
         Habitacion::create([
             'id' => 5,
             'nro' => 5,
@@ -64,7 +63,6 @@ class HabitacionSeeder extends Seeder
             'tipo_habitacion_id' => 2,
             'estado_id' => 4,
         ]);
-
         Habitacion::create([
             'id' => 6,
             'nro' => 6,

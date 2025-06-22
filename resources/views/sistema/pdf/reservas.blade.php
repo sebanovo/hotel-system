@@ -65,6 +65,7 @@
                     <th>Salida</th>
                     <th>Estado</th>
                     <th>Cliente</th>
+                    <th>Habitacion</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,6 +76,11 @@
                         <td>{{ $reserva->fecha_salida }}</td>
                         <td>{{ $reserva->estado->nombre }}</td>
                         <td>{{ $reserva->cliente_users->name }}</td>
+                        <td>
+                            @foreach ($reserva->habitaciones as $habitacion)
+                                <span>{{ $habitacion->nro }}</span>
+                            @endforeach
+                        </td>d
                     </tr>
                 @endforeach
             </tbody>

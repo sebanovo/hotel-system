@@ -168,14 +168,14 @@ class HabitacionController extends Controller
         $habitacion->url_foto = Storage::url($path);
         $habitacion->save();
 
-        return back()->with('success', 'Foto actualizada correctamente.');
+        return redirect()->route('habitaciones.index')->with('success', 'Foto de habitación actualizada con éxito.');
     }
 
     public function showHabitacion(string $id)
     {
         $habitacion = Habitacion::find($id);
         if (!$habitacion) {
-            return redirect()->route('habitaciones.index')->with('error', 'Habitación no encontrada.');
+            return back()->with('error', 'Habitación no encontrada.');
         }
 
         $cliente = Auth::user();

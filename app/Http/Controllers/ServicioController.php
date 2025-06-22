@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NotaVenta;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class ServicioController extends Controller
 {
@@ -13,6 +15,9 @@ class ServicioController extends Controller
     {
         $this->middleware('can:Gestionar servicios')->only(
             ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
+        $this->middleware('can:Solicitar servicio')->only(
+            ['solicitarServicio', 'comprarServicio']
         );
     }
     /**
@@ -123,5 +128,34 @@ class ServicioController extends Controller
         $servicios = Servicio::all();
         $pdf = Pdf::loadView('sistema.pdf.servicios', compact('servicios'));
         return $pdf->download('servicios.pdf');
+    }
+
+    public function showServicio(string $id)
+    {
+        $servicio = Servicio::find($id);
+        if (!$servicio) {
+            return back()->with('error', 'Servicio no encontrado.');
+        }
+
+        $cliente = Auth::user();
+        return view('sistema.servicios.comprar_servicio', compact('servicio', 'cliente'));
+    }
+
+    public function comprarServicio(Request $request, string $id)
+    {
+        $servicio = Servicio::find($id);
+        if (!$servicio) {
+            return back()->with('error', 'Servicio no encontrado.');
+        }
+
+        NotaVenta::create([
+            'user_cliente_id' => Auth::id(),
+            'servicio_id' => $servicio->id,
+            'monto_total' => $servicio->precio,
+            'tipo_pago_id' => 2, // Tarjeta de crédito
+            'fecha' => now(),
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Servicio comprado con éxito');
     }
 }

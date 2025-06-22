@@ -30,6 +30,7 @@
             'Salida',
             'Estado',
             'Cliente',
+            'Habitación',
             ['label' => 'Acciones', 'no-export' => true, 'width' => 15],
         ];
 
@@ -56,7 +57,7 @@
                         <td>{{ $reserva->id }}</td>
                         <td>{{ $reserva->fecha_inicio }}</td>
                         <td>{{ $reserva->fecha_salida }}</td>
-                          @php
+                        @php
                             switch ($reserva->estado->nombre) {
                                 case 'disponible':
                                     $color = 'success'; // verde
@@ -78,6 +79,11 @@
                             <span class="badge bg-{{ $color }}">{{ ucfirst($reserva->estado->nombre) }}</span>
                         </td>
                         <td>{{ $reserva->cliente_users->name }}</td>
+                        <td>
+                            @foreach ($reserva->habitaciones as $habitacion)
+                                <span class="badge bg-info text-dark">{{ $habitacion->nro }}</span>
+                            @endforeach
+                        </td>
                         <td>
                             <x-adminlte-button label="" theme="primary" icon="fa fa-lg fa-fw fa-pen"
                                 class="btn btn-xs btn-default text-primary mx-1 shadow" data-toggle="modal"

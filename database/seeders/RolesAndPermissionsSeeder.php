@@ -32,6 +32,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'Cambiar contraseña',
             'Gestionar configuraciones',
             'Reservar Habitacion', // Reservar Habitacion
+            'Solicitar servicio', // Solicitar servicio
         ];
 
         $permissions = [

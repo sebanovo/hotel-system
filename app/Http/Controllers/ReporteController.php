@@ -197,9 +197,11 @@ class ReporteController extends Controller
             $callback = function () use ($reservas) {
                 $handle = fopen('php://output', 'w');
                 fwrite($handle, "\xEF\xBB\xBF");
-                fputcsv($handle, ['ID', 'Inicio', 'Salida', 'Estado', 'Cliente']);
+                fputcsv($handle, ['ID', 'Inicio', 'Salida', 'Estado', 'Cliente', 'Habitación']);
                 foreach ($reservas as $reserva) {
-                    fputcsv($handle, [$reserva->id, $reserva->fecha_inicio, $reserva->fecha_salida, $reserva->estado->nombre, $reserva->cliente_users->name]);
+                    fputcsv($handle, [$reserva->id, $reserva->fecha_inicio, $reserva->fecha_salida, $reserva->estado->nombre, $reserva->cliente_users->name, $reserva->detalle_reservas->map(function ($detalle) {
+                        return $detalle->habitacion->id;
+                    })->implode(', ')]);
                 }
                 fclose($handle);
             };

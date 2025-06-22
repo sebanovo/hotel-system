@@ -382,13 +382,7 @@ return [
                     'route' => 'servicios.index',
                     'icon' => 'fas fa-fw fa-concierge-bell',
                     'can' => 'Gestionar servicios'
-                ],
-                [
-                    'text' => 'Reportes',
-                    'route' => 'reportes.index',
-                    'icon' => 'fas fa-fw fa-file-alt',
-                    'can' => ['Gestionar reservas', 'Gestionar servicios']
-                ],
+                ]
             ],
         ],
         [
@@ -422,6 +416,16 @@ return [
                     'can' => 'Gestionar clientes'
                 ],
             ],
+        ],
+        [
+            'header' => 'Reportes',
+            'can' => ['Gestionar reservas', 'Gestionar servicios', 'Gestionar habitaciones']
+        ],
+        [
+            'text' => 'Reportes',
+            'route' => 'reportes.index',
+            'icon' => 'fas fa-fw fa-file-alt',
+            'can' => ['Gestionar reservas', 'Gestionar servicios', 'Gestionar habitaciones']
         ],
         [
             'header' => 'Bitacora',

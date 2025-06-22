@@ -145,14 +145,17 @@ class ReservaController extends Controller
         $callback = function () use ($reservas) {
             $handle = fopen('php://output', 'w');
             fwrite($handle, "\xEF\xBB\xBF");
-            fputcsv($handle, ['ID', 'Inicio', 'Salida', 'Estado', 'Cliente']);
+            fputcsv($handle, ['ID', 'Inicio', 'Salida', 'Estado', 'Cliente', 'Habitación']);
             foreach ($reservas as $reserva) {
                 fputcsv($handle, [
                     $reserva->id,
                     $reserva->fecha_inicio,
                     $reserva->fecha_salida,
                     $reserva->estado->nombre,
-                    $reserva->cliente_users->name
+                    $reserva->cliente_users->name,
+                    $reserva->detalle_reservas->map(function ($detalle) {
+                        return $detalle->habitacion->id;
+                    })->implode(', ')
                 ]);
             }
             fclose($handle);
@@ -177,7 +180,24 @@ class ReservaController extends Controller
             'fecha_salida' => 'required|date|after:fecha_inicio',
         ]);
 
+        $estaReservado = DetalleReserva::where('habitacion_id', $request->habitacion_id)
+            ->whereHas('reservas', function ($query) use ($request) {
+                $query->where('estado_id', Estado::where('nombre', 'reservado')->first()->id)
+                    ->where(function ($query) use ($request) {
+                        $query->whereBetween('fecha_inicio', [$request->fecha_inicio, $request->fecha_salida])
+                            ->orWhereBetween('fecha_salida', [$request->fecha_inicio, $request->fecha_salida]);
+                    });
+            })->exists();
+
+        if ($estaReservado) {
+            return redirect()->back()->with('error', 'La habitación ya está reservada en las fechas seleccionadas.');
+        }
+
         $habitacion = Habitacion::findOrFail($request->habitacion_id);
+        // Verificar si la habitación está disponible
+        if ($habitacion->estado_id != Estado::where('nombre', 'disponible')->first()->id) {
+            return redirect()->back()->with('error', 'La habitación no está disponible para reservar.');
+        }
 
         // Calcular la cantidad de noches
         $fechaInicio = Carbon::parse($request->fecha_inicio);
@@ -188,7 +208,6 @@ class ReservaController extends Controller
         $precioPorNoche = $habitacion->precio;
         $montoTotal = $precioPorNoche * $cantidadNoches;
 
-        // Crear reserva
         $cliente = Auth::user();
         $reserva = Reserva::create([
             'user_cliente_id' => $cliente->id,
@@ -197,26 +216,18 @@ class ReservaController extends Controller
             'estado_id' => Estado::where('nombre', 'reservado')->first()->id,
         ]);
 
-        // Asociar habitación a reserva a través de la tabla intermedia
         $reserva->habitaciones()->attach($habitacion->id, [
             'precio_v' => $precioPorNoche,
             'cantidad' => $cantidadNoches,
         ]);
 
-        $notaVenta = NotaVenta::create([
+        NotaVenta::create([
             'reserva_id' => $reserva->id,
             'monto_total' => $montoTotal,
             'user_cliente_id' => $cliente->id,
             'fecha' => Carbon::now(),
             'tipo_pago_id' => 3 // transferencia bancaria
         ]);
-
-        // Opcional: cambiar el estado de la habitación
-        $estadoReservado = Estado::where('nombre', 'reservado')->first();
-        if ($estadoReservado) {
-            $habitacion->estado_id = $estadoReservado->id;
-            $habitacion->save();
-        }
 
         return redirect()->route('dashboard')->with('success', 'Reserva creada correctamente.');
     }

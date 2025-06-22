@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Habitacion;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class PanelController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('can:Administrar roles y permisos')->only(
-        //     ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
-        // );
+        $this->middleware('can:Reservar Habitacion')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
+        $this->middleware('can:Solicitar servicio')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+        );
     }
     /**
      * Display a listing of the resource.
@@ -20,7 +24,8 @@ class PanelController extends Controller
     {
         //
         $habitaciones = Habitacion::all();
-        return view('sistema.dashboard', compact('habitaciones'));
+        $servicios = Servicio::all();
+        return view('sistema.dashboard', compact('habitaciones', 'servicios'));
     }
 
     /**

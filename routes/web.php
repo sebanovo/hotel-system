@@ -33,6 +33,7 @@ Route::get('/', function () {
 
 Route::get('/link', function () {
     Artisan::call('storage:link');
+    return back()->with('success', 'Storage link created successfully.');
 });
 
 Route::middleware([
@@ -91,6 +92,9 @@ Route::middleware([
         Route::resource('/servicios', ServicioController::class)->names('servicios');
         Route::get('/servicios/exportar/csv', [ServicioController::class, 'csv'])->name('servicios.exportar.csv');
         Route::get('/servicios/exportar/pdf', [ServicioController::class, 'pdf'])->name('servicios.exportar.pdf');
+
+        Route::get('/servicios/comprar/{id}', [ServicioController::class, 'showServicio'])->name('showServicio');
+        Route::post('/servicios/comprar/{id}', [ServicioController::class, 'comprarServicio'])->name('comprarServicio');
     }
 
     // nota venta

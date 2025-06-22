@@ -7,6 +7,11 @@
 @stop
 
 @section('content')
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> {{ session('error') }}
+        </div>
+    @endif
     <form action="{{ route('reservarHabitacion') }}" method="POST">
         @csrf
 
