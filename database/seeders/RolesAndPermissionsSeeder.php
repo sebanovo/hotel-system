@@ -95,6 +95,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'Actualizar nota ventas',
             'Eliminar nota ventas',
 
+            'Gestionar pisos',
+            'Crear pisos',
+            'Leer pisos',
+            'Actualizar pisos',
+            'Eliminar pisos',
+
             ...$paquetes
         ];
 

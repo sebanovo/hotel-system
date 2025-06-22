@@ -364,6 +364,12 @@ return [
                     'icon' => 'fas fa-fw fa-door-closed',
                     'can' => 'Gestionar habitaciones'
                 ],
+                [
+                    'text' => 'Pisos',
+                    'route' => 'pisos.index',
+                    'icon' => 'fas fa-fw fa-building',
+                    'can' => 'Gestionar pisos'
+                ],
             ],
         ],
         [
@@ -397,7 +403,7 @@ return [
                     'can' => 'Gestionar tipo pagos'
                 ],
                 [
-                    'text' => 'Nota Ventas',
+                    'text' => 'Pagos', // Nota Ventas
                     'route' => 'notaventas.index',
                     'icon' => 'fas fa-file-invoice-dollar',
                     'can' => 'Gestionar nota ventas'

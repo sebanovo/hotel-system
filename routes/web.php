@@ -7,6 +7,7 @@ use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\NotaVentaController;
 use App\Http\Controllers\PanelController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\PisoController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RoleController;
@@ -77,6 +78,14 @@ Route::middleware([
         Route::put('/habitaciones/foto/{id}', [HabitacionController::class, 'updatePhoto'])->name('habitaciones.updatePhoto');
         Route::get('/habitaciones/reservar/{id}', [HabitacionController::class, 'showHabitacion'])->name('showHabitacion');
     }
+
+    // pisos 
+    {
+        Route::resource('/pisos', PisoController::class)->names('pisos');
+        Route::get('/pisos/exportar/csv', [PisoController::class, 'csv'])->name('pisos.exportar.csv');
+        Route::get('/pisos/exportar/pdf', [PisoController::class, 'pdf'])->name('pisos.exportar.pdf');
+    }
+
 
     // reservas 
     {
