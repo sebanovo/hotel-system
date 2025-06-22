@@ -106,6 +106,8 @@ Route::middleware([
 
         Route::get('/servicios/comprar/{id}', [ServicioController::class, 'showServicio'])->name('showServicio');
         Route::post('/servicios/comprar/{id}', [ServicioController::class, 'comprarServicio'])->name('comprarServicio');
+
+        Route::post('/servicios/asignar/', [ServicioController::class, 'asignarServicio'])->name('servicios.asignar');
     }
 
     // nota venta

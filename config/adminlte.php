@@ -350,7 +350,13 @@ return [
                     'route' => 'asignar.index',
                     'icon' => 'fas fa-user-lock',
                     'can' => 'Administrar roles y permisos'
-                ]
+                ],
+                [
+                    'text' => 'Clientes',
+                    'route' => 'clientes.index',
+                    'icon' => 'fas fa-fw fa-user',
+                    'can' => 'Gestionar clientes'
+                ],
             ],
         ],
         [
@@ -400,6 +406,12 @@ return [
                     'route' => 'servicios.index',
                     'icon' => 'fas fa-fw fa-concierge-bell',
                     'can' => 'Gestionar servicios'
+                ],
+                [
+                    'text' => 'Asignar servicios',
+                    'route' => 'servicios.create',
+                    'icon' => 'fas fa-fw fa-tasks',
+                    'can' => 'Gestionar servicios'
                 ]
             ],
         ],
@@ -420,19 +432,6 @@ return [
                     'icon' => 'fas fa-file-invoice-dollar',
                     'can' => 'Gestionar nota ventas'
                 ]
-            ],
-        ],
-        [
-            'text' => 'Gestionar clientes',
-            'icon' => 'fas fa-fw fa-users',
-            'can' => 'Gestionar paquete clientes',
-            'submenu' => [
-                [
-                    'text' => 'Clientes',
-                    'route' => 'clientes.index',
-                    'icon' => 'fas fa-fw fa-user',
-                    'can' => 'Gestionar clientes'
-                ],
             ],
         ],
         [

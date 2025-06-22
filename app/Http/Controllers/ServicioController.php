@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NotaVenta;
 use App\Models\Servicio;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -14,10 +15,10 @@ class ServicioController extends Controller
     public function __construct()
     {
         $this->middleware('can:Gestionar servicios')->only(
-            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf', 'asignarServicio']
         );
         $this->middleware('can:Solicitar servicio')->only(
-            ['solicitarServicio', 'comprarServicio']
+            ['comprarServicio']
         );
     }
     /**
@@ -36,6 +37,9 @@ class ServicioController extends Controller
     public function create()
     {
         //
+        $servicios = Servicio::all();
+        $clientes = User::role('Cliente')->get();
+        return view('sistema.servicios.asignar_servicio', compact('servicios', 'clientes'));
     }
 
     /**
@@ -157,5 +161,23 @@ class ServicioController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Servicio comprado con éxito');
+    }
+
+    public function asignarServicio(Request $request)
+    {
+        $request->validate([
+            'cliente_id' => 'required|exists:users,id',
+            'servicio_id' => 'required|exists:servicios,id',
+        ]);
+
+        NotaVenta::create([
+            'user_cliente_id' => $request->cliente_id,
+            'servicio_id' => $request->servicio_id,
+            'monto_total' => Servicio::find($request->servicio_id)->precio,
+            'tipo_pago_id' => 1, // Efectivo
+            'fecha' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Servicio asignado correctamente al cliente.');
     }
 }
