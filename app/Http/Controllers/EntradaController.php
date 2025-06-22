@@ -11,6 +11,12 @@ use Illuminate\Http\Request;
 
 class EntradaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Gestionar entradas')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'checkin']
+        );
+    }
     /**
      * Display a listing of the resource.
      */

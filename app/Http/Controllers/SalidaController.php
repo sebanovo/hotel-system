@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class SalidaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:Gestionar salidas')->only(
+            ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'checkout']
+        );
+    }
     /**
      * Display a listing of the resource.
      */
