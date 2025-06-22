@@ -45,6 +45,8 @@
     <div class="card">
         <div class="card-body">
             <div class="my-3">
+                <x-adminlte-button label="Nuevo" theme="primary" icon="fas fa-plus" class="float-right my-3" data-toggle="modal"
+                    data-target="#modalPurple" />
                 <a href="{{ route('habitaciones.exportar.pdf') }}">
                     <x-adminlte-button type="submit" label="Submit" theme="danger" icon="fas fa-file-pdf" label="pdf" />
                 </a>
@@ -54,6 +56,34 @@
                         label="csv" />
                 </a>
             </div>
+            <x-adminlte-modal id="modalPurple" title="Nuevo habitacion" theme="primary" icon="fas fa-bolt" size='lg'
+                disable-animations>
+                <form class="form-crear" action="{{ route('habitaciones.store') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        @php
+                            $pisoOptions = $pisos->pluck('nombre', 'id')->toArray();
+                            $tipoOptions = $tipo_habitaciones->pluck('nombre', 'id')->toArray();
+                            $estadoOptions = $estado_habitaciones->pluck('nombre', 'id')->toArray();
+                        @endphp
+
+                        <x-adminlte-input name="capacidad" label="Capacidad" placeholder="Capacidad" fgroup-class="col-md-6"
+                            disable-feedback />
+                        <x-adminlte-input name="precio" label="Precio" placeholder="100.0" fgroup-class="col-md-6"
+                            disable-feedback />
+                        <x-adminlte-select name="tipo" label="Tipo" igroup-size="sm">
+                            <x-adminlte-options :options="$tipoOptions" value="{{ 0 }}" required />
+                        </x-adminlte-select>
+                        <x-adminlte-select name="piso" label="Piso" igroup-size="sm">
+                            <x-adminlte-options :options="$pisoOptions" value="{{ 0 }}" required />
+                        </x-adminlte-select>
+                        <x-adminlte-select name="estado" label="Estado" igroup-size="sm">
+                            <x-adminlte-options :options="$estadoOptions" value="{{ 0 }}" required />
+                        </x-adminlte-select>
+                    </div>
+                    <x-adminlte-button type="submit" label="Guardar" theme="primary" icon="fas fa-save" />
+                </form>
+            </x-adminlte-modal>
             <x-adminlte-datatable id="table1" :heads="$heads" :config="$config">
                 @foreach ($habitaciones as $habitacion)
                     <tr>

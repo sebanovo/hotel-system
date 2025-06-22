@@ -49,6 +49,23 @@ class HabitacionController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'precio' => 'required|numeric|min:0',
+            'capacidad' => 'required|integer|min:1',
+            'tipo' => 'required|exists:tipo_habitacions,id',
+            'piso' => 'required|exists:pisos,id',
+            'estado' => 'required|exists:estados,id',
+        ]);
+
+        $habitacion = new Habitacion();
+        $habitacion->nro = Habitacion::count() + 1;
+        $habitacion->capacidad = $request->input('capacidad');
+        $habitacion->tipo_habitacion_id = $request->input('tipo');
+        $habitacion->piso_id = $request->input('piso');
+        $habitacion->estado_id = $request->input('estado');
+        $habitacion->precio = $request->input('precio');
+        $habitacion->save();
+        return back()->with('success', 'habitacion creado con éxito');
     }
 
     /**
