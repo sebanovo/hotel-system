@@ -181,7 +181,7 @@
                                         </x-adminlte-select>
 
                                         <x-adminlte-select name="estado" label="Estado" igroup-size="sm">
-                                            <x-adminlte-options :options="$estadoOptions" value="{{ $habitacion->estado->id }}"
+                                            <x-adminlte-options :options="$estadoOptions" :selected="$habitacion->estado->id"
                                                 required />
                                         </x-adminlte-select>
 

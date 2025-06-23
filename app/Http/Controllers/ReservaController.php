@@ -33,7 +33,8 @@ class ReservaController extends Controller
     {
         //
         $reservas = Reserva::with('detalle_reservas.habitacion')->get();
-        return view('sistema.reservas.mostrar_reservas', compact(('reservas')));
+        $estados = Estado::all();
+        return view('sistema.reservas.mostrar_reservas', compact('reservas', 'estados'));
     }
 
     /**

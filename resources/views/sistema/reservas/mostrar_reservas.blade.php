@@ -97,8 +97,12 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
-                                        <x-adminlte-input name="estado" label="Estado" value="{{ $reserva->estado->id }}"
-                                            fgroup-class="col-md-6" disable-feedback />
+                                        @php
+                                            $estados_reservas = $estados->pluck('nombre', 'id')->toArray();
+                                        @endphp
+                                        <x-adminlte-select name="estado" label="Estado" igroup-size="sm">
+                                            <x-adminlte-options :options="$estados_reservas" :selected="$reserva->estado->id" required />
+                                        </x-adminlte-select>
                                     </div>
                                     <x-adminlte-button type="submit" label="Actualizar" theme="primary"
                                         icon="fas fa-save" />
