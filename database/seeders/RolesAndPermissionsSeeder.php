@@ -22,7 +22,6 @@ class RolesAndPermissionsSeeder extends Seeder
             'Gestionar paquete habitaciones', // Gestionar habitaciones
             'Gestionar paquete reservas', // Gestionar reservas
             'Gestionar paquete pagos', // Gestionar pagos
-            'Gestionar paquete clientes', // Gestionar clientes
         ];
 
         $compartido = [
@@ -141,7 +140,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Actualizar tipo pagos',
                 'Eliminar tipo pagos',
 
-                'Gestionar clientes', // Gestionar cliente
+                'Gestionar clientes', // Gestionar clientes
                 'Crear clientes',
                 'Leer clientes',
                 'Actualizar clientes',
@@ -157,10 +156,10 @@ class RolesAndPermissionsSeeder extends Seeder
                 'Gestionar salidas', // Gestionar salidas (check-out)
 
                 ...$compartido,
+                $paquetes[0],
                 $paquetes[1],
                 $paquetes[2],
                 $paquetes[3],
-                $paquetes[4],
             ],
             'Cliente' => [
                 ...$compartido

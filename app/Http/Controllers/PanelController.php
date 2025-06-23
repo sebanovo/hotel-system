@@ -28,10 +28,10 @@ class PanelController extends Controller
     public function index()
     {
         //
-        $usuario = Auth::user();
+        $usuario = User::find(Auth::user()->id);
         if ($usuario->hasRole('Administrador') || $usuario->hasRole('Recepcionista')) {
             return view(
-                'sistema.dashboard',
+                'sistema.dashboards.administrador_recepcionista',
                 [
                     'habitacionesCount' => Habitacion::count(),
                     'reservasActivasCount' => Reserva::where('estado_id', Estado::where('nombre', 'reservado')->first()->id)->count(),
@@ -43,6 +43,7 @@ class PanelController extends Controller
                 ]
             );
         }
+        // sino es Cliente
         $habitaciones = Habitacion::all();
         $servicios = Servicio::all();
         return view('sistema.dashboards.cliente', compact('habitaciones', 'servicios'));

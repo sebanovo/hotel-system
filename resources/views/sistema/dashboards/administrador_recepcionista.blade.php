@@ -9,35 +9,25 @@
 @section('content')
     <div class="row">
 
-        <!-- Habitaciones -->
         <div class="col-md-3">
             <x-adminlte-small-box title="Habitaciones" text="{{ $habitacionesCount }} registradas" icon="fas fa-bed text-white"
                 theme="teal" url="{{ route('habitaciones.index') }}" url-text="Ver habitaciones" />
         </div>
 
-        <!-- Reservas activas -->
         <div class="col-md-3">
             <x-adminlte-small-box title="Reservas activas" text="{{ $reservasActivasCount }} en curso" icon="fas fa-calendar-check text-white"
                 theme="purple" url="{{ route('reservas.index') }}" url-text="Ver reservas" />
         </div>
 
-        <!-- Clientes registrados -->
         <div class="col-md-3">
             <x-adminlte-small-box title="Clientes" text="{{ $clientesCount }} registrados" icon="fas fa-users text-white"
                 theme="info" url="{{ route('clientes.index') }}" url-text="Ver clientes" />
         </div>
 
-        {{-- <!-- Servicios vendidos -->
-        <div class="col-md-3">
-            <x-adminlte-small-box title="Servicios vendidos" text="{{ $serviciosVendidosCount }} ventas" icon="fas fa-concierge-bell text-white"
-                theme="success" url="{{ route('servicios.index') }}" url-text="Ver servicios" />
-        </div> --}}
-
     </div>
 
     <div class="row mt-4">
 
-        <!-- Tabla de próximas salidas -->
         <div class="col-md-6">
             <x-adminlte-card title="Próximas salidas" theme="warning" icon="fas fa-door-open">
                 <ul class="list-group">
@@ -53,7 +43,6 @@
             </x-adminlte-card>
         </div>
 
-        <!-- Estado general -->
         <div class="col-md-6">
             <x-adminlte-card title="Estado general del hotel" theme="primary" icon="fas fa-chart-pie">
                 <p><strong>Ocupación actual:</strong> {{ $ocupacionPorcentaje }}%</p>
