@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TipoPago;
+use App\Models\Articulo;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use Barryvdh\DomPDF\Facade\Pdf;
 
-class TipoPagoController extends Controller
+class ArticuloController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:Gestionar tipo pagos')->only(
+        $this->middleware('can:Gestionar articulos')->only(
             ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy', 'csv', 'pdf']
         );
     }
@@ -21,8 +21,8 @@ class TipoPagoController extends Controller
     public function index()
     {
         //
-        $tipo_pagos = TipoPago::all();
-        return view('sistema.tipo_pago.mostrar_tipo_pago', compact(('tipo_pagos')));
+        $articulos = Articulo::all();
+        return view('sistema.articulos.mostrar_articulos', compact('articulos'));
     }
 
     /**
@@ -42,10 +42,10 @@ class TipoPagoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:100',
         ]);
-        $tipo_pago = new TipoPago();
-        $tipo_pago->nombre = $request->input('nombre');
-        $tipo_pago->save();
-        return back()->with('success', 'tipo_pago creado con éxito');
+        $articulo = new Articulo();
+        $articulo->nombre = $request->input('nombre');
+        $articulo->save();
+        return back()->with('success', 'articulo creado con éxito');
     }
 
     /**
@@ -73,10 +73,10 @@ class TipoPagoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:100',
         ]);
-        $tipo_pago = TipoPago::find($id);
-        $tipo_pago->nombre = $request->input('nombre');
-        $tipo_pago->save();
-        return redirect()->route('tipo_pagos.index')->with('success', 'tipo_pago actualizado con éxito');
+        $articulo = Articulo::find($id);
+        $articulo->nombre = $request->input('nombre');
+        $articulo->save();
+        return redirect()->route('articulos.index')->with('success', 'articulo actualizado con éxito');
     }
 
     /**
@@ -85,29 +85,29 @@ class TipoPagoController extends Controller
     public function destroy(string $id)
     {
         //
-        $tipo_pago = TipoPago::find($id);
-        $tipo_pago->delete();
-        return back()->with('success', 'tipo_pago eliminado con éxito');
+        $articulo = Articulo::find($id);
+        $articulo->delete();
+        return back()->with('success', 'articulo eliminado con éxito');
     }
 
     public function csv()
     {
-        $tipo_pagos = TipoPago::all();
+        $articulos = Articulo::all();
 
         $headers = [
             "Content-type" => "text/csv",
-            "Content-Disposition" => "attachment; filename=tipo_pagos.csv",
+            "Content-Disposition" => "attachment; filename=articulos.csv",
             "Pragma" => "no-cache",
             "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
             "Expires" => "0"
         ];
 
-        $callback = function () use ($tipo_pagos) {
+        $callback = function () use ($articulos) {
             $handle = fopen('php://output', 'w');
             fwrite($handle, "\xEF\xBB\xBF");
             fputcsv($handle, ['ID', 'Nombre']);
-            foreach ($tipo_pagos as $tipo_pago) {
-                fputcsv($handle, [$tipo_pago->id, $tipo_pago->nombre]);
+            foreach ($articulos as $articulo) {
+                fputcsv($handle, [$articulo->id, $articulo->nombre]);
             }
             fclose($handle);
         };
@@ -117,8 +117,8 @@ class TipoPagoController extends Controller
 
     public function pdf()
     {
-        $tipo_pagos = TipoPago::all();
-        $pdf = Pdf::loadView('sistema.pdf.tipo_pago', compact('tipo_pagos'));
-        return $pdf->download('tipo_pagos.pdf');
+        $articulos = Articulo::all();
+        $pdf = Pdf::loadView('sistema.pdf.articulos', compact('articulos'));
+        return $pdf->download('articulos.pdf');
     }
 }

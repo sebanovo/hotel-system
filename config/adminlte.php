@@ -376,6 +376,12 @@ return [
                     'icon' => 'fas fa-fw fa-building',
                     'can' => 'Gestionar pisos'
                 ],
+                [
+                    'text' => 'Articulos',
+                    'route' => 'articulos.index',
+                    'icon' => 'fas fa-fw fa-box',
+                    'can' => 'Gestionar articulos'
+                ],
             ],
         ],
         [

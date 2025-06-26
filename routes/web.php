@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\ClienteController;
@@ -81,13 +82,19 @@ Route::middleware([
         Route::get('/habitaciones/reservar/{id}', [HabitacionController::class, 'showHabitacion'])->name('showHabitacion');
     }
 
+    // articulos
+    {
+        Route::resource('/articulos', ArticuloController::class)->names('articulos');
+        Route::get('/articulos/exportar/csv', [ArticuloController::class, 'csv'])->name('articulos.exportar.csv');
+        Route::get('/articulos/exportar/pdf', [ArticuloController::class, 'pdf'])->name('articulos.exportar.pdf');
+    }
+
     // pisos 
     {
         Route::resource('/pisos', PisoController::class)->names('pisos');
         Route::get('/pisos/exportar/csv', [PisoController::class, 'csv'])->name('pisos.exportar.csv');
         Route::get('/pisos/exportar/pdf', [PisoController::class, 'pdf'])->name('pisos.exportar.pdf');
     }
-
 
     // reservas 
     {

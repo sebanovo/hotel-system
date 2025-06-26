@@ -103,6 +103,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'Gestionar entradas',  // Gestionar entradas (check-in)
             'Gestionar salidas', // Gestionar salidas (check-out)
 
+            'Gestionar articulos', // Gestionar articulos
+            'Crear articulos',
+            'Leer articulos',
+            'Actualizar articulos',
+            'Eliminar articulos',
+
             ...$paquetes
         ];
 
@@ -154,6 +160,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
                 'Gestionar entradas',  // Gestionar entradas (check-in)
                 'Gestionar salidas', // Gestionar salidas (check-out)
+
+                'Gestionar articulos', // Gestionar articulos
+                'Crear articulos',
+                'Leer articulos',
+                'Actualizar articulos',
+                'Eliminar articulos',
 
                 ...$compartido,
                 $paquetes[0],
